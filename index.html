@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bet Hub — Prototype Progress</title>
+<style>
+  /*
+   * Colours sourced from the KDS design tokens (design-system/src/styles/tokens.css),
+   * Betano brand + Light theme — pre-vetted for WCAG AA contrast.
+   */
+  :root {
+    --kds-bg-page: #f7f9fc;              /* sem/color/bg/off-gray-subtle/default */
+    --kds-bg-surface: #ffffff;           /* sem/color/bg/container-lowest/default */
+    --kds-border: #e2e8f8;               /* sem/color/border/off-gray-pale */
+    --kds-divider: #dbe5f5;              /* sem/color/fg/divider-soft */
+    --kds-text: #151923;                 /* sem/color/text/gray-emphasis (contrast ~16:1 on white) */
+    --kds-text-subtle: #526789;          /* sem/color/text/gray-subtle (contrast ~5.9:1 on white) */
+    --kds-accent: #ff3c00;               /* brand/color/primary/default */
+    --kds-accent-ink: #ffffff;           /* text on accent fill */
+    --kds-success: #3a7824;              /* brand/color/text/15 */
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: var(--kds-bg-page);
+    color: var(--kds-text);
+    font-family: 'Ubuntu Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .timeline-wrap {
+    padding: 14px 28px 14px;
+    background: var(--kds-bg-surface);
+    border-bottom: 1px solid var(--kds-border);
+  }
+  .timeline {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 11px;
+    height: 2px;
+    background: var(--kds-divider);
+    z-index: 0;
+  }
+  .timeline .progress-fill {
+    position: absolute;
+    left: 0;
+    top: 11px;
+    height: 2px;
+    background: var(--kds-accent);
+    z-index: 1;
+    transition: width 0.3s ease;
+  }
+  .step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    padding: 0 6px;
+    flex: 1;
+    max-width: 220px;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--kds-bg-surface);
+    border: 2px solid var(--kds-text-subtle);
+    transition: all 0.2s ease;
+  }
+  .step.active .dot {
+    background: var(--kds-accent);
+    border-color: var(--kds-accent);
+    box-shadow: 0 0 0 3px rgba(255, 60, 0, 0.2);
+  }
+  .step.done .dot {
+    background: var(--kds-success);
+    border-color: var(--kds-success);
+  }
+  .label {
+    font-size: 12px;
+    color: var(--kds-text-subtle);
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+  .step.active .label {
+    color: var(--kds-text);
+    font-weight: 700;
+  }
+  .sublabel {
+    font-size: 10px;
+    color: var(--kds-text-subtle);
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .nav-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .nav-btn {
+    background: var(--kds-bg-surface);
+    border: 1px solid var(--kds-text-subtle);
+    color: var(--kds-text);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 550;
+    cursor: pointer;
+  }
+  .nav-btn:hover:not(:disabled) { border-color: var(--kds-accent); color: var(--kds-accent); }
+  .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .stage {
+    flex: 1;
+    position: relative;
+    background: var(--kds-bg-page);
+    padding: 20px;
+  }
+  .stage iframe {
+    position: absolute;
+    inset: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border: 1px solid var(--kds-border);
+    background: #fff;
+  }
+  .stage iframe.rounded {
+    border-radius: 24px;
+  }
+  .stage .frame-label {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    z-index: 5;
+    background: var(--kds-text);
+    color: #fff;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.3px;
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <div class="timeline-wrap">
+      <div class="timeline" id="timeline">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn">&larr; Prev</button>
+        <button class="nav-btn" id="nextBtn">Next &rarr;</button>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="frame-label" id="frameLabel"></div>
+      <iframe id="stageFrame" title="Bet Hub prototype preview"></iframe>
+    </div>
+  </div>
+
+<script>
+  const versions = [
+    { id: "initial", label: "Initial", sub: "Initial prototype", file: "versions/initial/index.html", rounded: false },
+    { id: "v7",      label: "v7",      sub: "Gamification & selecting odds", file: "versions/v7/bet-hub-v7.html?filter=primePicks", rounded: true },
+    { id: "v9",      label: "v9",      sub: "Extra tab: Bet Builder combo & Bet Builder", file: "versions/v9/bet-hub-v9.html", rounded: true },
+    { id: "v10",     label: "v10",     sub: "Current", file: "versions/v10/bet-hub-v10.html", rounded: true },
+  ];
+
+  const timeline = document.getElementById("timeline");
+  const progressFill = document.getElementById("progressFill");
+  const stageFrame = document.getElementById("stageFrame");
+  const frameLabel = document.getElementById("frameLabel");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  let current = versions.length - 1;
+
+  versions.forEach((v, i) => {
+    const btn = document.createElement("button");
+    btn.className = "step";
+    btn.dataset.index = i;
+    btn.innerHTML = `<div class="dot"></div><div class="label">${v.label}</div><div class="sublabel">${v.sub}</div>`;
+    btn.addEventListener("click", () => setCurrent(i));
+    timeline.appendChild(btn);
+  });
+
+  function render() {
+    const steps = timeline.querySelectorAll(".step");
+    steps.forEach((s, i) => {
+      s.classList.toggle("active", i === current);
+      s.classList.toggle("done", i < current);
+    });
+    const pct = versions.length > 1 ? (current / (versions.length - 1)) * 100 : 0;
+    progressFill.style.width = pct + "%";
+
+    const v = versions[current];
+    stageFrame.src = v.file;
+    stageFrame.classList.toggle("rounded", !!v.rounded);
+    frameLabel.textContent = `${v.label} — ${v.sub}`;
+
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === versions.length - 1;
+  }
+
+  function setCurrent(i) {
+    current = Math.max(0, Math.min(versions.length - 1, i));
+    render();
+  }
+
+  prevBtn.addEventListener("click", () => setCurrent(current - 1));
+  nextBtn.addEventListener("click", () => setCurrent(current + 1));
+
+  render();
+</script>
+</body>
+</html>

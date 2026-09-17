@@ -1,0 +1,3654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,700&display=swap" rel="stylesheet">
+  <style>
+
+    @font-face {
+      font-family: 'Betano_Nichrome';
+      src: url('file:///Users/o.zavitsanou/Library/Fonts/BetanoNichrome-Dark.otf') format('opentype');
+      font-weight: 900; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Betano_Nichrome';
+      src: url('file:///Users/o.zavitsanou/Library/Fonts/BetanoNichrome-Regular.otf') format('opentype');
+      font-weight: 400; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Betano_Nichrome';
+      src: url('file:///Users/o.zavitsanou/Library/Fonts/BetanoNichrome-BoldOblique.otf') format('opentype');
+      font-weight: 700; font-style: oblique;
+    }
+
+    /* ════════════════════════════════════════════════════
+       DESIGN TOKENS
+    ════════════════════════════════════════════════════ */
+    :root {
+      --font-brand:  'Betano_Nichrome', 'Impact', sans-serif;
+      --font-body:   'Ubuntu', sans-serif;
+
+      --color-bg-page:                    #f4f7fa;
+      --color-gradient-start:             #db3300;
+      --color-gradient-end:               #8a143b;
+      --color-acca-grad-light:            rgb(255, 60, 0);
+      --color-acca-grad-dark:             rgb(43, 48, 59);
+      --color-badge-grad-accent:          rgb(255, 0, 120);
+      --color-badge-grad-primary:         rgb(255, 60, 0);
+      --color-bg-card-header-bar:         #2b303b;
+      --color-bg-dialog:                  #ffffff;
+      --color-border-card:                #c8d3df;
+      --color-border-receipt-accent:      #f75252;
+      --color-separator-dashed:           #e1e6ef;
+      --color-bg-selection-btn:           #f7f9fc;
+      --color-border-selection-btn:       #c2cee5;
+      --color-bg-cta-btn:                 #f4f7fa;
+      --color-border-cta-btn:             #c8d3df;
+      --color-bg-switch-track:            #eaeef5;
+      --color-border-switch-track:        #c2cee5;
+      --color-bg-switch-active:           #ffffff;
+      --color-bg-chip-selected:           #151923;
+      --color-border-chip-default:        #c2cee5;
+      --color-bg-chip-league-logo:        #c9f363;
+      --color-text-inverted:              #ffffff;
+      --color-text-absolute-black:        #090915;
+      --color-text-emphasis:              #151923;
+      --color-text-strong:                #383f4c;
+      --color-text-subtle:                #526789;
+      --color-text-highlight:             #3a7824;
+      --color-border-sp-card:             #c2cee5;
+      --color-overlay-sp-logo-bubble:     rgba(239, 239, 250, 0.5);
+      --color-border-offer-card:          #e2e8f8;
+      --color-offer-team-bubble:          rgba(255, 255, 255, 0.3);
+      --shadow-card: 0px 0px 8px rgba(35,43,54,0.06),
+                     0px 3px 3px -1px rgba(35,43,54,0.10);
+    }
+
+    /* ════════════════════════════════════════════════════
+       RESET
+    ════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    button { font: inherit; cursor: pointer; background: none; border: none; }
+    a { text-decoration: none; }
+
+    body {
+      background: #dde2e8;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 48px 24px;
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 360px;
+      background: var(--color-bg-page);
+      padding-bottom: 80px;
+      min-height: calc(100vh - 96px);
+    }
+
+    /* ════════════════════════════════════════════════════
+       APP HEADER — STATUS BAR + NAV BAR
+    ════════════════════════════════════════════════════ */
+    .app-header {
+      background: #ff3c00;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    /* Status bar */
+    .status-bar {
+      position: relative;
+      height: 54px;
+      background: #ff3c00;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .status-bar__time {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 125.485px;
+      height: 54px;
+    }
+    .status-bar__time img,
+    .status-bar__items img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      max-width: none;
+    }
+    .status-bar__items {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 125.485px;
+      height: 54px;
+    }
+
+    /* Nav bar */
+    .app-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      background: #ff3c00;
+      flex-shrink: 0;
+    }
+    .app-nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 100%;
+      padding-left: 16px;
+      flex-shrink: 0;
+    }
+    .app-nav__logo-img {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+    .app-nav__logo-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      max-width: none;
+    }
+    .app-nav__right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 100%;
+      padding-right: 16px;
+      flex-shrink: 0;
+    }
+    .app-nav__icon {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+    .app-nav__icon img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      max-width: none;
+    }
+    /* Balance + Deposit pill */
+    .app-nav__balance-pill {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding-left: 4px;
+      background: #db3400;
+      border-radius: 24px 8px 8px 24px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .app-nav__balance-pill .app-nav__icon {
+      overflow: hidden;
+    }
+    .app-nav__amount {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 16px;
+      color: white;
+      white-space: nowrap;
+    }
+    .app-nav__deposit-btn {
+      -webkit-appearance: none; appearance: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 32px;
+      padding: 0 10px;
+      background: #2BB63D;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 12px;
+      color: #ffffff;
+      white-space: nowrap;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .app-nav__deposit-btn svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════════════════════════
+       CONTENT AREA
+    ════════════════════════════════════════════════════ */
+    .home-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ════════════════════════════════════════════════════
+       SECTION HEADERS
+    ════════════════════════════════════════════════════ */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 24px 16px 8px;
+      width: 100%;
+    }
+    .section-title {
+      font-family: var(--font-brand);
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 24px;
+      color: var(--color-text-emphasis);
+      text-transform: uppercase;
+      letter-spacing: 0;
+      flex: 1;
+    }
+    .section-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      padding: 0;
+      border: none;
+      background: none;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      color: var(--color-text-strong);
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .section-cta__icon {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .home-section { padding: 0 8px; }
+
+    /* ════════════════════════════════════════════════════
+       BET OF DAY CARD
+    ════════════════════════════════════════════════════ */
+    .bod-section {
+      padding: 8px 8px 0;
+    }
+    .bod-card {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      border: 1px solid rgba(184,197,224,0.2);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .bod-card__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .bod-date-section {
+      position: relative;
+      z-index: 2;
+      padding: 8px;
+      flex-shrink: 0;
+    }
+    .bod-date-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 8px;
+      border-radius: 12px;
+      background: rgba(9,13,21,0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .bod-date-pill span {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 14px;
+      color: white;
+      padding: 4px 0;
+    }
+    .bod-event-section {
+      position: relative;
+      z-index: 0;
+      flex-shrink: 0;
+      width: 100%;
+      background: linear-gradient(to bottom,
+        rgba(9,13,21,0) 0%,
+        rgba(9,13,21,0.7) 32%,
+        #090d15 60%
+      );
+      display: flex;
+      flex-direction: column;
+    }
+    .bod-event-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      backdrop-filter: blur(11px);
+      -webkit-backdrop-filter: blur(11px);
+      -webkit-mask-image: linear-gradient(to top, black 40%, transparent 100%);
+      mask-image: linear-gradient(to top, black 40%, transparent 100%);
+    }
+    .bod-badge-double {
+      position: absolute;
+      left: 0;
+      top: -25px;
+      height: 49px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 6px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .bod-badges-row {
+      display: flex;
+      align-items: flex-end;
+      isolation: isolate;
+      position: relative;
+    }
+    .bod-badge {
+      display: flex;
+      align-items: flex-end;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .bod-badge--offer {
+      margin-right: -6px;
+      z-index: 3;
+    }
+    .bod-badge--bb-boost { z-index: 2; }
+    .bod-badge__lead {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 1px 4px 1px 12px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    .bod-badge__lead--offer {
+      background: white;
+      justify-content: center;
+    }
+    .bod-badge__lead--bb-boost {
+      background: linear-gradient(69.72deg, #db3300 0%, #ff0078 100%);
+    }
+    .bod-badge__icon {
+      position: relative;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .bod-badge__icon img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      max-width: none;
+    }
+    .bod-badge__text {
+      font-family: var(--font-brand);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 18px;
+      color: white;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .bod-badge__end {
+      width: 4px;
+      height: 22px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .bod-badge__end img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      max-width: none;
+    }
+    .bod-main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 24px 12px 12px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .bod-participants {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .bod-team {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    .bod-team__logo {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+    .bod-team__name {
+      font-family: var(--font-brand);
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 24px;
+      color: white;
+      padding-left: 4px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .bod-selections {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding-top: 4px;
+      width: 100%;
+    }
+    .bod-sel-btn {
+      flex: 1 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 36px;
+      min-height: 36px;
+      max-height: 36px;
+      min-width: 48px;
+      padding: 10px 8px;
+      border-radius: 8px;
+      background: #f7f9fc;
+      border: 1px solid #e2e8f8;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .bod-sel-btn__label {
+      flex: 1;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      color: #151923;
+      text-align: left;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .bod-sel-btn__odds {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 16px;
+      color: #3a7824;
+      white-space: nowrap;
+    }
+
+    /* ════════════════════════════════════════════════════
+       STORIES CAROUSEL
+    ════════════════════════════════════════════════════ */
+    .stories-section {
+      padding: 0 0 8px;
+      overflow: hidden;
+    }
+    .stories-carousel {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      padding: 8px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .stories-carousel::-webkit-scrollbar { display: none; }
+
+    .story-thumb {
+      position: relative;
+      height: 120px;
+      border-radius: 8px;
+      overflow: hidden;
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .story-thumb--sm   { width: 82px; }
+    .story-thumb--wide { width: 170px; }
+
+    .story-thumb__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .story-thumb__overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(9,13,21,0.2) 0%, rgba(9,13,21,0.2) 100%),
+        linear-gradient(180deg, rgba(9,13,21,0) 50%, rgba(9,13,21,0.5) 81.51%, rgb(9,13,21) 100%);
+      pointer-events: none;
+    }
+    .story-thumb__icon {
+      position: relative;
+      z-index: 1;
+      width: 24px; height: 24px;
+      border-radius: 100px;
+      background: #131320;
+      border: 1px solid #ff3c00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+    .story-thumb__icon img {
+      width: 16px; height: 16px;
+      display: block;
+    }
+    .story-thumb__label {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 12px;
+      color: white;
+    }
+    /* Wide story: offer text block at bottom */
+    .story-thumb__offer-text {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .story-thumb__offer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 2px 4px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 4px;
+      align-self: flex-start;
+    }
+    .story-thumb__offer-badge img {
+      width: 16px; height: 16px; display: block;
+    }
+    .story-thumb__offer-badge-text {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 12px;
+      color: #090915;
+      white-space: nowrap;
+    }
+    /* Wide story: top-right tag + notification */
+    .story-thumb__tag {
+      position: absolute;
+      top: 7px; right: 4px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .story-thumb__tag-text {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 400;
+      line-height: 12px;
+      color: white;
+      text-transform: capitalize;
+    }
+    .story-thumb__notif {
+      background: #37a25c;
+      border-radius: 8px;
+      min-width: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1px 4px;
+    }
+    .story-thumb__notif-count {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      line-height: 12px;
+      color: white;
+    }
+    /* Front image overlay (Offers Page, Aviator) */
+    .story-thumb__front {
+      position: absolute;
+      left: 13px; top: 27px;
+      width: 55px; height: 66px;
+      object-fit: cover;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ════════════════════════════════════════════════════
+       ACCA CARDS  (shared from bet-hub)
+    ════════════════════════════════════════════════════ */
+    .acca-cards {
+      display: flex; flex-direction: row; gap: 8px;
+      overflow-x: auto; scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .acca-cards::-webkit-scrollbar { display: none; }
+
+    .acca-card {
+      display: flex; flex-direction: column;
+      border-radius: 16px; overflow: hidden;
+      flex-shrink: 0; width: 276px;
+      background: var(--color-bg-card-header-bar);
+      position: relative;
+    }
+    .acca-card__grad-corner {
+      position: absolute; top: 0; right: 0;
+      width: 65px; height: 55px; z-index: 0;
+      background: linear-gradient(224deg, var(--color-badge-grad-accent) 4.61%, var(--color-badge-grad-primary) 56.2%);
+    }
+    .acca-card__bar {
+      display: flex; align-items: center;
+      height: 32px; padding-left: 16px;
+      border-radius: 16px 16px 0 0;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .acca-card__bar-left {
+      display: flex; align-items: center; gap: 4px; flex: 1;
+      height: 100%; overflow: hidden;
+    }
+    .acca-card__label {
+      font-family: var(--font-body); font-size: 14px;
+      font-weight: 700; line-height: 16px;
+      color: var(--color-text-inverted); white-space: nowrap;
+    }
+    .acca-card__bar-curve {
+      flex-shrink: 0; display: block;
+      transform: translateX(6px);
+    }
+    .acca-card__price-badge {
+      display: flex; align-items: center; justify-content: center;
+      height: 32px; padding: 0 16px 0 2px; flex-shrink: 0;
+      min-width: 64px;
+    }
+    .acca-card__badge-value {
+      font-family: var(--font-body); font-size: 14px;
+      font-weight: 700; line-height: 16px;
+      color: #ffffff; white-space: nowrap;
+    }
+    .acca-card__body {
+      background: var(--color-bg-dialog);
+      border: 1px solid var(--color-border-card);
+      border-radius: 16px;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      flex: 1; display: flex; flex-direction: column;
+      position: relative; z-index: 1;
+    }
+    .acca-card__receipt { flex: 1; }
+    .bet-rows { display: flex; flex-direction: column; }
+    .bet-row {
+      display: flex; flex-direction: column;
+      gap: 4px; padding: 12px 12px 0;
+    }
+    .bet-row:last-child { padding-bottom: 12px; }
+    .bet-row__main { display: flex; align-items: center; }
+    .bet-row__sport-icon-wrap {
+      display: flex; align-items: center;
+      width: 16px; flex-shrink: 0; margin-right: 8px;
+    }
+    .bet-row__sport-icon { width: 16px; height: 16px; display: block; }
+    .bet-row__event {
+      display: flex; flex-direction: column; gap: 2px;
+      flex: 1; min-width: 0; justify-content: center;
+    }
+    .bet-row__selection {
+      font-family: var(--font-body); font-size: 12px;
+      font-weight: 700; line-height: 16px;
+      color: var(--color-text-emphasis);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .bet-row__fixture {
+      font-family: var(--font-body); font-size: 11px;
+      font-weight: 400; line-height: 14px;
+      color: var(--color-text-strong);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .bet-row__date {
+      font-family: var(--font-body); font-size: 11px;
+      font-weight: 400; line-height: 12px;
+      color: var(--color-text-strong);
+    }
+    .bet-row__odds {
+      display: flex; align-items: center; justify-content: center;
+      min-width: 66px; height: 36px; flex-shrink: 0;
+      padding: 10px 8px; border-radius: 8px;
+      background: var(--color-bg-selection-btn);
+      border: 1px solid var(--color-border-selection-btn);
+      font-family: var(--font-body); font-size: 14px;
+      font-weight: 700; line-height: 16px;
+      color: var(--color-text-highlight);
+      margin-left: 8px; cursor: pointer;
+    }
+    .bet-row__meta {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding-left: 24px;
+    }
+    .bet-row__trending { display: flex; align-items: center; gap: 2px; }
+    .bet-row__fire { width: 16px; height: 16px; }
+    .bet-row__trending-label {
+      font-family: var(--font-body); font-size: 11px;
+      font-weight: 700; font-style: italic; line-height: 12px;
+      color: var(--color-text-strong); white-space: nowrap;
+    }
+    .bet-row__separator {
+      width: 100%; height: 0;
+      border-bottom: 1px dashed var(--color-separator-dashed);
+    }
+    .acca-card__cta { padding: 12px; margin-top: auto; }
+    .betslip-btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2px; width: 100%; height: 36px;
+      padding: 10px 8px; border-radius: 8px;
+      background: var(--color-bg-cta-btn);
+      border: 1px solid var(--color-border-cta-btn);
+    }
+    .betslip-btn__text {
+      font-family: var(--font-body); font-size: 12px;
+      font-weight: 700; line-height: 12px;
+      color: var(--color-text-strong); white-space: nowrap;
+    }
+    .betslip-btn__arrow {
+      width: 10px; height: 10px;
+      transform: rotate(-90deg); flex-shrink: 0;
+    }
+    .betslip-btn__odds {
+      font-family: var(--font-body); font-size: 14px;
+      font-weight: 700; line-height: 16px;
+      color: var(--color-text-highlight); white-space: nowrap;
+    }
+
+    /* ════════════════════════════════════════════════════
+       STAR PLAYERS CARDS — horizontal card carousel
+    ════════════════════════════════════════════════════ */
+
+    .sp-cards {
+      display: flex; flex-direction: row; align-items: center;
+      gap: 8px; overflow-x: auto; overflow-y: visible;
+      padding: 0 0 12px; scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .sp-cards::-webkit-scrollbar { display: none; }
+
+    /* Outer wrapper — 20 px headroom for jersey overhang */
+    .sp-card {
+      position: relative;
+      width: 238px; height: 290px; flex-shrink: 0;
+    }
+
+    /* Inner card — sits flush at the bottom of the wrapper */
+    .sp-card__inner {
+      position: absolute; bottom: 0; left: 0;
+      width: 238px; height: 270px; border-radius: 12px;
+      display: flex; flex-direction: column;
+      align-items: center; padding: 66px 12px 12px;
+    }
+
+    /* Team-colour background (clipped to rounded corners) */
+    .sp-card__bg {
+      position: absolute; inset: 0;
+      border-radius: 12px; overflow: hidden;
+    }
+
+    /* Dark gradient overlay */
+    .sp-card__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(9,13,21,0.1) 0%, #090d15 100%);
+    }
+
+    /* Rotated brand watermark */
+    .sp-card__watermark {
+      position: absolute; top: 24px; left: 50%;
+      transform: translateX(-50%);
+      width: 238px; height: 306px;
+      mix-blend-mode: hard-light;
+      pointer-events: none; overflow: hidden;
+    }
+    .sp-card__watermark img {
+      width: 238px; height: 306px;
+      transform: rotate(180deg); display: block;
+    }
+
+    /* Player name + fixture text (centred) */
+    .sp-card__player-info {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; gap: 2px;
+      align-items: center; padding: 8px 0;
+      width: 100%; text-align: center; flex-shrink: 0;
+    }
+    .sp-card__player-name {
+      font-family: var(--font-body);
+      font-size: 14px; font-weight: 700; line-height: 20px;
+      color: white; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; width: 100%;
+    }
+    .sp-card__match-text {
+      font-family: var(--font-body);
+      font-size: 12px; font-weight: 400; line-height: 16px;
+      color: white; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; width: 100%;
+    }
+
+    /* Market rows area */
+    .sp-card__content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+      flex: 1; align-items: flex-start;
+      justify-content: flex-end;
+      padding: 0 6px 6px; width: 100%;
+    }
+    .sp-markets { display: flex; flex-direction: column; width: 100%; }
+
+    .sp-market-row {
+      display: flex; gap: 8px; align-items: flex-start;
+      width: 100%; flex-shrink: 0;
+    }
+
+    /* Betbuilder indicator — dot + dashed connector */
+    .sp-market-row__indicator {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 3px;
+      padding-top: 3px; align-self: stretch;
+      flex-shrink: 0; width: 8px; z-index: 2;
+    }
+    .sp-bb-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.75);
+      background: transparent; flex-shrink: 0;
+    }
+    .sp-bb-line {
+      flex: 1; width: 0;
+      border-left: 1px dashed rgba(255,255,255,0.35);
+      min-height: 4px;
+    }
+
+    /* Market text — white on dark card */
+    .sp-market-row__text {
+      flex: 1 0 0; min-width: 0; padding-bottom: 4px;
+      font-family: var(--font-body); font-size: 11px;
+      font-weight: 400; line-height: 14px;
+      color: white; overflow: hidden;
+      text-overflow: ellipsis; position: relative; z-index: 1;
+    }
+    .sp-market-row__text b { font-weight: 700; }
+
+    /* Odds button */
+    .sp-odds-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 36px; border-radius: 8px;
+      background: #f4f7fa; border: 1px solid #e2e9f3;
+      font-family: var(--font-body); font-size: 14px;
+      font-weight: 700; line-height: 16px;
+      color: var(--color-text-highlight);
+      position: relative; z-index: 1; flex-shrink: 0;
+    }
+
+    /* Jersey image that sticks up above the card */
+    .sp-card__jersey {
+      position: absolute; top: -20px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 5; display: flex; flex-direction: column; align-items: center;
+    }
+    .sp-card__jersey-wrap {
+      width: 70px; height: 84px;
+      padding: 2px 4px; position: relative;
+    }
+    .sp-card__jersey-img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .sp-card__jersey-number {
+      position: absolute; left: 35px; top: 50%;
+      transform: translate(-50%, -48%);
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-body);
+      font-size: 24px; font-weight: 700; line-height: 30px;
+      color: white; text-align: center; pointer-events: none;
+    }
+
+    /* Match indicator pill — two team logo bubbles */
+    .sp-card__match-indicator {
+      position: absolute; top: 40px; left: 88px;
+      display: flex; gap: 7px; align-items: center;
+      padding: 4px; border-radius: 100px;
+      box-shadow: 0px 0px 8px rgba(35,43,54,0.06),
+                  0px 6px 6px -1px rgba(35,43,54,0.1);
+      overflow: hidden; z-index: 6;
+    }
+    .sp-card__match-logo {
+      display: flex; align-items: center; justify-content: center;
+      width: 18px; height: 18px; border-radius: 360px;
+      background: rgba(9,13,21,0.5);
+      overflow: hidden; flex-shrink: 0;
+    }
+    .sp-card__match-logo img { width: 14px; height: 14px; object-fit: cover; }
+    .sp-card__match-divider {
+      width: 2px; height: 12px; border-radius: 8px;
+      background: rgba(9,13,21,0.5); flex-shrink: 0;
+    }
+
+    /* Social proof pill — top right */
+    .sp-card__social-proof {
+      position: absolute; top: 12px; right: 8px;
+      display: flex; align-items: center; gap: 4px;
+      padding: 1px 6px 1px 4px;
+      background: #131320; border-radius: 12px; z-index: 10;
+    }
+    .sp-card__sp-fire { font-size: 11px; line-height: 14px; }
+    .sp-card__sp-count {
+      font-family: var(--font-body);
+      font-size: 11px; font-weight: 700; line-height: 16px;
+      color: white; letter-spacing: 0.22px;
+    }
+
+    /* BB Boost badge — top left, overhangs the card edge */
+    .sp-card__bb-boost {
+      position: absolute; top: 14px; left: -4px;
+      z-index: 10; width: 70px; height: 16px; overflow: hidden;
+    }
+    .sp-card__bb-boost-bg {
+      position: absolute; inset: 0;
+      width: 70px; height: 16px; display: block;
+    }
+    .sp-card__bb-boost-content {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; gap: 2px;
+      padding: 2px 6px 2px 2px; height: 16px;
+    }
+    .sp-card__bb-boost-icon { width: 12px; height: 12px; flex-shrink: 0; display: block; }
+    .sp-card__bb-boost-label {
+      font-family: var(--font-body);
+      font-size: 9px; font-weight: 700; line-height: 12px;
+      color: white; white-space: nowrap;
+    }
+
+    /* ════════════════════════════════════════════════════
+       OFFER CARDS (Enhanced)
+    ════════════════════════════════════════════════════ */
+    .offer-cards {
+      display: flex; flex-direction: row; gap: 8px;
+      overflow-x: auto; scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .offer-cards::-webkit-scrollbar { display: none; }
+    .offer-card {
+      background: white;
+      border: 1px solid var(--color-border-offer-card);
+      border-radius: 12px; overflow: hidden;
+      position: relative; display: flex; flex-direction: column;
+      isolation: isolate; padding-top: 10px;
+      flex-shrink: 0; width: 276px;
+    }
+    .offer-card__brand-vector {
+      position: absolute; top: -1px; left: -1px; right: -1px;
+      height: 124px; pointer-events: none; z-index: 1;
+    }
+    .offer-card__brand-vector img {
+      position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+    }
+    .offer-card__badges {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 24px; padding-right: 8px; padding-bottom: 2px;
+      position: relative; z-index: 4; flex-shrink: 0; width: 100%;
+    }
+    .offer-badges { display: flex; align-items: flex-end; flex-shrink: 0; isolation: isolate; }
+    .offer-badge {
+      display: flex; align-items: center; height: 100%;
+      margin-right: -4px; flex-shrink: 0; z-index: 2; position: relative;
+    }
+    .offer-badge__lead {
+      display: flex; align-items: center; justify-content: center; gap: 2px;
+      padding: 1px 4px 1px 12px; height: 22px; flex-shrink: 0;
+    }
+    .offer-badge__icon { position: relative; width: 18px; height: 18px; flex-shrink: 0; }
+    .offer-badge__icon img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .offer-badge__text {
+      font-family: var(--font-brand); font-size: 14px; font-weight: 900;
+      line-height: 18px; color: white; text-transform: uppercase; white-space: nowrap;
+    }
+    .offer-badge__end { height: 22px; width: 4px; position: relative; flex-shrink: 0; }
+    .offer-badge__end img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .offer-badge-info {
+      display: flex; align-items: center; height: 20px;
+      flex-shrink: 0; isolation: isolate; z-index: 1;
+    }
+    .offer-badge-info__container {
+      background: var(--color-bg-page);
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 4px 0 8px; height: 100%; flex-shrink: 0; position: relative; z-index: 2;
+    }
+    .offer-badge-info__icon { position: relative; width: 12px; height: 12px; }
+    .offer-badge-info__icon img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .offer-badge-info__vector { width: 4px; height: 100%; position: relative; flex-shrink: 0; z-index: 1; }
+    .offer-badge-info__vector img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .offer-social-proof {
+      background: white; border: 1px solid var(--color-border-sp-card);
+      border-radius: 4px; display: flex; align-items: center; justify-content: flex-end;
+      gap: 3px; padding: 2px 6px 2px 4px; flex-shrink: 0;
+    }
+    .offer-social-proof__fire {
+      position: relative; width: 12px; height: 12px; overflow: hidden; flex-shrink: 0;
+    }
+    .offer-social-proof__fire img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .offer-social-proof__count {
+      font-family: var(--font-body); font-size: 12px;
+      font-weight: 500; line-height: 16px; color: var(--color-text-emphasis); white-space: nowrap;
+    }
+    .offer-card__content {
+      display: flex; flex-direction: column; align-items: flex-end;
+      flex-shrink: 0; width: 100%; position: relative; z-index: 3;
+    }
+    .offer-date {
+      display: flex; align-items: center; justify-content: center;
+      gap: 4px; padding: 0 6px; flex-shrink: 0; width: 100%;
+    }
+    .offer-date__sport { position: relative; width: 16px; height: 16px; flex-shrink: 0; }
+    .offer-date__sport img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .offer-date__text {
+      font-family: var(--font-body); font-size: 11px;
+      font-weight: 400; line-height: 14px; color: var(--color-text-emphasis);
+      white-space: nowrap; text-align: center;
+    }
+    .offer-participants {
+      display: flex; align-items: center; justify-content: center;
+      gap: 4px; flex-shrink: 0; width: 100%;
+    }
+    .offer-team {
+      flex: 1 0 0; min-width: 0; height: 32px; display: flex; align-items: center;
+    }
+    .offer-team__name {
+      flex: 1 0 0; min-width: 0;
+      font-family: var(--font-body); font-size: 12px;
+      font-weight: 700; line-height: 16px; color: var(--color-text-emphasis);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .offer-team--a { padding-left: 8px; justify-content: flex-end; }
+    .offer-team--a .offer-team__name { text-align: right; }
+    .offer-team--b { padding-right: 8px; justify-content: flex-start; }
+    .offer-logos { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .offer-logo-bubble {
+      background: var(--color-offer-team-bubble);
+      border-radius: 12px; width: 22px; height: 22px;
+      position: relative; flex-shrink: 0; overflow: hidden;
+    }
+    .offer-logo-bubble img {
+      position: absolute; top: 2px; left: 2px;
+      width: 18px; height: 18px; object-fit: cover;
+    }
+    .offer-markets {
+      display: flex; flex-direction: column; align-items: flex-start;
+      overflow: hidden; padding: 0 12px; height: 60px;
+      flex-shrink: 0; width: 100%;
+    }
+    .offer-market-content {
+      display: flex; flex-direction: column; align-items: flex-start; width: 100%;
+    }
+    .offer-market-row {
+      display: flex; gap: 8px; align-items: flex-start;
+      isolation: isolate; padding: 0 1px;
+      position: relative; width: 100%; flex-shrink: 0;
+    }
+    .offer-market-row__indicator {
+      position: relative; align-self: stretch;
+      width: 8px; flex-shrink: 0; z-index: 2;
+    }
+    .offer-market-row__indicator img {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%; height: 100%; max-width: none; display: block;
+    }
+    .offer-market-row__text {
+      flex: 1 0 0; min-width: 0; padding-bottom: 4px;
+      font-family: var(--font-body); font-size: 12px;
+      font-weight: 400; line-height: 16px; color: var(--color-text-emphasis);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      position: relative; z-index: 1;
+    }
+    .offer-market-row__text b { font-weight: 700; }
+    .offer-card__footer {
+      display: flex; flex-direction: column; align-items: flex-start;
+      padding: 4px 12px 12px; flex-shrink: 0; width: 100%; position: relative; z-index: 2;
+    }
+    .offer-odds-btn {
+      background: var(--color-bg-selection-btn);
+      border: 1px solid var(--color-border-offer-card);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      gap: 4px; height: 36px; overflow: hidden; padding: 10px 8px;
+      width: 100%; cursor: pointer;
+    }
+    .offer-odds-btn__old {
+      font-family: var(--font-body); font-size: 14px;
+      font-weight: 400; line-height: 16px; color: var(--color-text-subtle);
+      text-decoration: line-through; white-space: nowrap;
+    }
+    .offer-odds-btn__new {
+      font-family: var(--font-body); font-size: 14px;
+      font-weight: 700; line-height: 16px; color: var(--color-text-highlight); white-space: nowrap;
+    }
+
+    /* ════════════════════════════════════════════════════
+       POPULAR LEAGUES CAROUSEL
+    ════════════════════════════════════════════════════ */
+    .pop-leagues-section { padding: 0 8px 16px; }
+    .pop-leagues-carousel { position: relative; display: flex; flex-direction: column; gap: 8px; }
+    .pop-leagues-row {
+      display: flex; flex-direction: row; gap: 8px;
+      overflow-x: auto; overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .pop-leagues-row::-webkit-scrollbar { display: none; }
+    .pop-leagues-arrow {
+      position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      width: 24px; height: 24px; border-radius: 4px;
+      background: #16181d; z-index: 2; overflow: hidden; pointer-events: none;
+    }
+    .pop-leagues-arrow img { position: absolute; top: 4px; right: 7px; bottom: 4px; left: 7px; width: auto; height: auto; }
+    .league-card {
+      position: relative; height: 48px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: #fcfcfd; border: 1px solid #c2cee5;
+    }
+    .league-card--featured {
+      background: linear-gradient(0.54deg, #eceff1 42.25%, #e65c00 123.23%);
+      border-color: #e65c00;
+    }
+
+    /* ── Bet Hub gradient-border entry card ────────────── */
+    @property --bh-border-angle {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 0deg;
+    }
+    @keyframes bh-border-spin {
+      to { --bh-border-angle: 720deg; }
+    }
+    .league-card--bh {
+      border: none;
+      padding: 1.5px;
+      box-sizing: border-box;
+      border-radius: 11px;
+      background: linear-gradient(87deg, var(--sem-color-bg-gradient-primary-emphasis-start, #FF3C00) 0%, var(--sem-color-bg-gradient-primary-emphasis-end, #FF0078) 100%);
+      text-decoration: none;
+    }
+    .league-card--bh:hover { filter: brightness(1.06); }
+    .bh-card-inner {
+      background: #fcfcfd;
+      border-radius: 9.5px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .league-card--bh .league-card__content {
+      border-radius: 9px;
+    }
+    .league-card--bh .league-card__lead-bg {
+      background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(124,58,237,0.15));
+      border-color: rgba(255,107,53,0.3);
+    }
+    .league-card__name--bh {
+      background: linear-gradient(90deg, #ff6b35, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .league-card__content {
+      position: relative; display: flex; align-items: center; gap: 8px; padding: 8px;
+    }
+    .league-card__lead {
+      position: relative; width: 32px; height: 32px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .league-card__lead-bg {
+      position: absolute; inset: 0; border-radius: 8px;
+      background: rgba(255,255,255,0.3); border: 1px solid #d1d9eb;
+    }
+    .league-card__icon {
+      width: 24px; height: 24px; flex-shrink: 0;
+      position: relative; z-index: 1; object-fit: cover; display: block;
+    }
+    .league-card__sport-badge {
+      position: absolute; left: 15px; top: 26px;
+      background: #eceff9; border-radius: 30.857px; padding: 1px;
+      display: flex; align-items: center; justify-content: center; z-index: 2;
+    }
+    .league-card__sport-badge img { width: 16px; height: 16px; display: block; }
+    .league-card__info { display: flex; flex-direction: column; justify-content: center; flex-shrink: 0; }
+    .league-card__name {
+      font-family: var(--font-body); font-size: 14px;
+      font-weight: 700; line-height: 20px; color: #151923; white-space: nowrap;
+    }
+    .league-card__sponsored { display: flex; align-items: center; gap: 2px; }
+    .league-card__sponsored-text {
+      font-family: var(--font-body); font-size: 11px;
+      font-weight: 400; line-height: 14px; color: #526789; white-space: nowrap;
+    }
+    .league-card__betano-logo { width: 38px; height: 12px; display: block; object-fit: contain; }
+
+    /* ════════════════════════════════════════════════════
+       JOIN THE ACTION
+    ════════════════════════════════════════════════════ */
+    .join-action-section {
+      background: #eff2fa; border-radius: 0 0 24px 24px;
+      display: flex; flex-direction: column; padding-bottom: 16px;
+    }
+    .join-action-header {
+      display: flex; align-items: center; gap: 8px; padding: 16px 16px 8px;
+    }
+    .join-action-title {
+      flex: 1; font-family: 'Betano_Nichrome', 'Ubuntu', sans-serif;
+      font-size: 20px; font-weight: 900; line-height: 24px;
+      color: #151923; text-transform: uppercase; white-space: nowrap;
+    }
+    .join-action-filters { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
+    .join-filter-chip {
+      display: flex; align-items: center; gap: 4px;
+      height: 32px; padding: 4px 12px 4px 8px;
+      border: 1px solid #8092b3; border-radius: 8px; background: white;
+      cursor: pointer; font-family: var(--font-body); font-size: 12px;
+      font-weight: 500; line-height: 16px; color: #151923; white-space: nowrap; flex-shrink: 0;
+    }
+    .join-filter-chip__icon { width: 16px; height: 16px; flex-shrink: 0; position: relative; overflow: hidden; display: block; }
+    .join-filter-chip__icon img { display: block; width: 100%; height: 100%; }
+    .upcoming-icon-wrap { position: relative; width: 16px; height: 16px; overflow: hidden; flex-shrink: 0; }
+    .upcoming-icon-wrap img { position: absolute; max-width: none; }
+    .join-action-sports-bar {
+      display: flex; align-items: center; gap: 8px;
+      height: 64px; padding: 8px; flex-shrink: 0;
+      background: linear-gradient(to bottom, white, #eff2fa); overflow: hidden;
+    }
+    .sport-tab {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-width: 64px; padding: 4px 8px; border-radius: 8px; cursor: pointer; flex-shrink: 0;
+    }
+    .sport-tab--active { background: white; border: 1px solid #b7c4dc; }
+    .sport-tab__icon { width: 24px; height: 24px; display: block; flex-shrink: 0; }
+    .sport-tab__label {
+      font-family: var(--font-body); font-size: 12px; font-weight: 400;
+      line-height: 16px; color: #151923; text-align: center;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 72px;
+    }
+    .sport-tab--active .sport-tab__label { font-weight: 700; }
+    .sport-tabs-scroll {
+      display: flex; align-items: center; gap: 8px; height: 64px;
+      overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; flex: 1; min-width: 0;
+    }
+    .sport-tabs-scroll::-webkit-scrollbar { display: none; }
+    .join-action-cards { display: flex; flex-direction: column; gap: 8px; padding: 4px 8px; }
+    .event-card {
+      background: white; border: 1px solid #e2e8f8; border-radius: 12px;
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .event-card__top-row { display: flex; align-items: flex-start; }
+    .event-card__match-info {
+      flex: 1; display: flex; align-items: center; gap: 8px;
+      padding: 12px 12px 0; min-width: 0;
+    }
+    .event-card__time {
+      font-family: var(--font-body); font-size: 12px; font-weight: 400;
+      line-height: 16px; color: #526789; white-space: nowrap;
+      padding: 0 2px; display: flex; gap: 4px; flex-shrink: 0;
+    }
+    .event-card__divider-v { width: 1px; align-self: stretch; background: #e2e8f8; flex-shrink: 0; }
+    .event-card__meta-icons { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .event-card__meta-icon { width: 16px; height: 16px; display: block; object-fit: contain; }
+    .event-card__tappable { display: flex; align-items: center; gap: 16px; padding: 12px 12px 0; flex-shrink: 0; }
+    .event-card__participants { padding: 6px 12px; display: flex; flex-direction: column; gap: 4px; }
+    .event-card__team-row { display: flex; align-items: center; gap: 4px; min-width: 0; }
+    .event-card__team-name {
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      line-height: 16px; color: #151923;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+    }
+    .event-card__rc { width: 12px; height: 12px; position: relative; flex-shrink: 0; }
+    .event-card__rc-card {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 8px; height: 10px; background: #e50b0b; border-radius: 1px;
+    }
+    .event-card__rc-num {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-family: var(--font-body); font-size: 9px; font-weight: 500;
+      line-height: 12px; color: white; z-index: 1;
+    }
+    .event-card__market-title {
+      font-family: var(--font-body); font-size: 10px; font-weight: 400;
+      line-height: 12px; color: #2a3346; padding: 0 14px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .event-card__odds-row { display: flex; gap: 8px; padding: 6px 12px 12px; }
+    .sel-btn {
+      flex: 1; height: 36px; min-height: 36px; max-height: 36px; min-width: 48px;
+      background: #f7f9fc; border: 1px solid #e2e8f8; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 4px; padding: 10px 8px; cursor: pointer; overflow: hidden;
+    }
+    .sel-btn__label {
+      flex: 1; font-family: var(--font-body); font-size: 12px; font-weight: 400;
+      line-height: 16px; color: #151923; min-width: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .sel-btn__odds {
+      font-family: var(--font-body); font-size: 14px; font-weight: 700;
+      line-height: 16px; color: #3a7824; white-space: nowrap; flex-shrink: 0; text-align: right;
+    }
+    /* Six-pack (2-row) event card layout */
+    .sixpack-header { display: flex; align-items: center; height: 32px; padding: 8px 0; }
+    .sixpack-league-info {
+      flex: 1; display: flex; align-items: center; gap: 2px;
+      padding: 10px 12px; min-width: 0; height: 18px;
+    }
+    .sixpack-league-icons { display: flex; align-items: center; flex-shrink: 0; }
+    .sixpack-league-icon {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 1px solid #a9b9d1; background: white;
+      display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;
+    }
+    .sixpack-league-icon:first-child { margin-right: -4px; z-index: 1; position: relative; }
+    .sixpack-league-icon img { width: 10.5px; height: 10.5px; object-fit: cover; display: block; }
+    .sixpack-league-name {
+      font-family: var(--font-body); font-size: 11px; font-weight: 400;
+      line-height: 12px; color: #151923; white-space: nowrap; padding: 2px 4px;
+    }
+    .sixpack-col-headers {
+      flex: 1; display: flex; align-items: center; gap: 8px;
+      justify-content: flex-end; min-width: 190px; padding: 0 12px 0 8px;
+    }
+    .sixpack-col-header {
+      flex: 1; font-family: var(--font-body); font-size: 10px; font-weight: 400;
+      line-height: 12px; color: #526789; text-align: center; min-width: 40px;
+    }
+    .sixpack-divider { height: 1px; background: #e2e8f8; margin: 0 12px; }
+    .sixpack-body { display: flex; min-height: 136px; }
+    .sixpack-teams-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .sixpack-top-info {
+      display: flex; align-items: center; gap: 8px; padding: 12px 12px 0;
+    }
+    .sixpack-time {
+      font-family: var(--font-body); font-size: 12px; font-weight: 400;
+      line-height: 16px; color: #526789; white-space: nowrap;
+      padding: 0 2px; display: flex; gap: 4px; flex-shrink: 0;
+    }
+    .sixpack-participants {
+      flex: 1; display: flex; flex-direction: column; gap: 4px;
+      justify-content: center; padding: 4px 4px 4px 12px;
+    }
+    .sixpack-team-name {
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      line-height: 16px; color: #151923;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sixpack-team-divider { height: 1px; background: #e2e8f8; }
+    .sixpack-bottom-actions { display: flex; align-items: center; gap: 16px; padding: 0 12px 12px; }
+    .sixpack-odds-col {
+      flex: 1; min-width: 190px; display: flex; gap: 8px;
+      align-items: center; justify-content: center; padding: 12px 12px 12px 8px;
+    }
+    .sixpack-market-col { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .sel-btn--tall {
+      height: 52px; min-height: 52px; max-height: 52px;
+      flex-direction: column; gap: 0; padding: 10px 4px;
+      align-items: center; justify-content: center;
+    }
+    .sel-btn--tall .sel-btn__label { text-align: center; }
+
+    /* ════════════════════════════════════════════════════
+       BOTTOM NAVIGATION BAR
+    ════════════════════════════════════════════════════ */
+    .bottom-nav {
+      position: fixed; bottom: 0;
+      left: 50%; transform: translateX(-50%);
+      width: 360px; z-index: 50;
+      background: #fcfcfd;
+      border-top: 1px solid #e2e8f8;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding-bottom: 8px;
+    }
+    .nav-items-row {
+      background: white;
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; height: 56px; padding: 4px 0; flex-shrink: 0;
+    }
+    .nav-item {
+      flex: 1 0 0; min-width: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 2px; padding: 2px; overflow: hidden;
+    }
+    .nav-item__icon-pill {
+      display: flex; align-items: center; justify-content: center;
+      width: 44px; height: 28px; border-radius: 16px; padding: 2px 10px;
+    }
+    .nav-item--active .nav-item__icon-pill { background: #ffddd1; }
+    .nav-item__icon { position: relative; width: 24px; height: 24px; flex-shrink: 0; }
+    .nav-item__icon svg { position: absolute; inset: 2px; display: block; }
+    .nav-item__label {
+      font-family: var(--font-body); font-size: 10px;
+      font-weight: 700; line-height: 12px; text-align: center;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;
+      color: var(--color-text-subtle);
+    }
+    .nav-item--active .nav-item__label { color: var(--color-gradient-start); }
+    .nav-casino-pill {
+      flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: 48px; height: 56px; padding: 8px 4px;
+      background: #ebedf4; border-radius: 32px 0 0 32px; overflow: hidden;
+    }
+    .nav-casino-pill__icon { position: relative; width: 40px; height: 40px; }
+    .nav-casino-pill__icon img {
+      position: absolute; inset: 0; width: 100%; height: 100%; display: block; max-width: none;
+    }
+    .nav-home-indicator {
+      width: 120px; height: 4px; background: #151923; border-radius: 100px; flex-shrink: 0;
+    }
+
+    /* ── Betslip FAB ─────────────────────────────────────────── */
+    .betslip-fab {
+      position: fixed;
+      bottom: 76px; /* 64px nav + 12px gap */
+      right: calc(50vw - 172px); /* 8px inside the right edge of the 360px frame */
+      width: 52px; height: 52px;
+      border-radius: 30px;
+      background: #ff3c00;
+      box-shadow: 0px 4px 4px rgba(9, 9, 21, 0.2);
+      display: none;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+      z-index: 200;
+    }
+    .betslip-fab.is-visible { display: flex !important; }
+    .betslip-fab__odds {
+      font-family: var(--font-body); font-size: 14px; font-weight: 700;
+      line-height: 16px; color: #ffffff; text-align: center;
+    }
+    .betslip-fab__badge {
+      position: absolute; top: -2px; right: -2px;
+      min-width: 16px; height: 16px; padding: 2px 4px;
+      background: #37a25c; border-radius: 8px;
+      font-family: var(--font-body); font-size: 11px; font-weight: 700;
+      line-height: 12px; color: #ffffff; text-align: center;
+    }
+    /* selected state for odds buttons */
+    .sel-btn.is-selected { background: #ff3c00; border-color: transparent; }
+    .sel-btn.is-selected .sel-btn__label { color: #ffffff; }
+    .sel-btn.is-selected .sel-btn__odds  { color: #ffffff; font-weight: 700; }
+    .bod-sel-btn.is-selected { background: #ff3c00; border-color: transparent; }
+    .bod-sel-btn.is-selected .bod-sel-btn__label { color: #ffffff; }
+    .bod-sel-btn.is-selected .bod-sel-btn__odds  { color: #ffffff; font-weight: 700; }
+    .betslip-btn.is-selected { background: #ff3c00; border-color: transparent; }
+    .betslip-btn.is-selected .betslip-btn__text { color: #ffffff; }
+    .betslip-btn.is-selected .betslip-btn__odds { color: #ffffff; }
+    .betslip-btn.is-selected .betslip-btn__arrow { filter: brightness(0) invert(1); }
+    .sp-odds-btn.is-selected { background: #ff3c00; border-color: transparent; color: #ffffff; }
+    .offer-odds-btn.is-selected { background: #ff3c00; border-color: transparent; }
+    .offer-odds-btn.is-selected .offer-odds-btn__old { color: rgba(255,255,255,0.6); }
+    .offer-odds-btn.is-selected .offer-odds-btn__new { color: #ffffff; }
+
+
+    /* ════════════════════════════════════════════════════
+       FILTERS BOTTOM SHEET
+    ════════════════════════════════════════════════════ */
+
+    /* Overlay */
+    .bs-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(9,13,21,0.5);
+      z-index: 300;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .bs-overlay.is-open { display: flex; }
+
+    /* Sheet panel */
+    .bs-panel {
+      width: 360px;
+      background: #ffffff;
+      border-radius: 12px 12px 0 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      max-height: 90vh;
+    }
+
+    /* Grabber */
+    .bs-grabber {
+      display: flex;
+      justify-content: center;
+      padding: 8px 16px 4px;
+      flex-shrink: 0;
+    }
+    .bs-grabber__bar {
+      width: 36px;
+      height: 4px;
+      background: #c2cee5;
+      border-radius: 100px;
+    }
+
+    /* Header */
+    .bs-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 16px 8px;
+      flex-shrink: 0;
+    }
+    .bs-title {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 16px;
+      color: var(--color-text-emphasis);
+    }
+    .bs-divider {
+      height: 1px;
+      background: var(--color-border-card);
+      flex-shrink: 0;
+    }
+
+    /* Scrollable body */
+    .bs-body {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      flex: 1;
+    }
+    .bs-body::-webkit-scrollbar { display: none; }
+
+    /* Section label */
+    .bs-section-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+      color: #2a3346;
+      padding: 12px 20px 8px;
+    }
+
+    /* Leagues area */
+    .bs-leagues {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px 16px 16px;
+    }
+
+    /* World Cup featured card */
+    .bs-league-featured {
+      background: #2a3046;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .bs-league-featured__header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+    }
+    .bs-league-logo {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .bs-league-logo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+    .bs-league-featured__name {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .bs-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 8px;
+      padding: 8px;
+    }
+
+    /* Chips */
+    .bs-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+      white-space: nowrap;
+      cursor: pointer;
+      flex-shrink: 0;
+      border: none;
+    }
+    .bs-chip--default {
+      background: rgba(239,239,250,0.7);
+      border: 1px solid #c2cee5;
+      color: var(--color-text-emphasis);
+      backdrop-filter: blur(2px);
+    }
+    .bs-chip--selected {
+      background: #090d15;
+      border: 1px solid transparent;
+      color: #ffffff;
+    }
+    .bs-chip__icon {
+      width: 16px;
+      height: 16px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .bs-chip__icon img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .bs-chip__arrow {
+      width: 16px;
+      height: 16px;
+      position: relative;
+      flex-shrink: 0;
+      transform: rotate(90deg);
+    }
+    .bs-chip__arrow img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .bs-view-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      height: 24px;
+      border-radius: 12px;
+      background: #f7f9fc;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 12px;
+      color: #2a3346;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    /* League pill rows */
+    .bs-leagues-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bs-leagues-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .bs-league-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 12px;
+      background: #fcfcfd;
+      border: 1px solid #c2cee5;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .bs-league-pill__logo {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .bs-league-pill__logo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+    .bs-league-pill__name {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 20px;
+      color: var(--color-text-emphasis);
+      white-space: nowrap;
+    }
+
+    /* Odds chips row */
+    .bs-odds-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px 16px 12px;
+      opacity: 0.8;
+    }
+
+    /* Range slider */
+    .bs-range-area {
+      padding: 0 16px 16px;
+    }
+    .bs-range-values {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 56px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      color: #000;
+      margin-bottom: 12px;
+    }
+    .bs-range-track {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: relative;
+    }
+    .bs-range-segment {
+      height: 4px;
+      border-radius: 2px;
+    }
+    .bs-range-segment--off   { background: #c2cee5; }
+    .bs-range-segment--on    { background: #090d15; flex: 1; }
+    .bs-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #090d15;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .bs-range-edge {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 16px 0;
+    }
+
+    /* Footer */
+    .bs-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px;
+      border-top: 1px solid var(--color-border-card);
+      background: #ffffff;
+      flex-shrink: 0;
+      height: 72px;
+    }
+    .bs-btn-clear {
+      flex: 1;
+      height: 40px;
+      border-radius: 8px;
+      border: 1.5px solid var(--color-text-emphasis);
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 12px;
+      color: var(--color-text-emphasis);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+    .bs-btn-show {
+      flex: 1;
+      height: 40px;
+      border-radius: 8px;
+      background: #2BB63D;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 12px;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ APP HEADER ═════════════════════════════════ -->
+  <header class="app-header">
+    <!-- Status bar -->
+    <div class="status-bar">
+      <div class="status-bar__time">
+        <img src="icon-status-time.svg" alt="">
+      </div>
+      <div class="status-bar__items">
+        <img src="icon-status-items.svg" alt="">
+      </div>
+    </div>
+
+    <!-- Nav bar -->
+    <div class="app-nav">
+      <div class="app-nav__logo">
+        <div class="app-nav__logo-img">
+          <img src="logo-betano-b.svg" alt="Betano">
+        </div>
+      </div>
+      <div class="app-nav__right">
+        <!-- Offer icon -->
+        <div class="app-nav__icon">
+          <img src="icon-nav-offer.svg" alt="">
+        </div>
+        <!-- Search icon -->
+        <div class="app-nav__icon">
+          <img src="icon-search.svg" alt="">
+        </div>
+        <!-- Balance + Deposit pill -->
+        <div class="app-nav__balance-pill">
+          <div class="app-nav__icon">
+            <img src="icon-profile.svg" alt="">
+          </div>
+          <div class="app-nav__amount">
+            <span>$</span><span>0,00</span>
+          </div>
+          <button class="app-nav__deposit-btn" type="button">
+            DEPOSIT
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.5 2.5L8 6L4.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ HOME CONTENT ═══════════════════════════════ -->
+  <main class="home-content">
+
+    <!-- ── Bet of Day ────────────────────────────────── -->
+    <div class="bod-section">
+      <div class="bod-card">
+        <img class="bod-card__bg" src="assets/c85ca092-5445-4142-adf4-bf20daf693bc.png" alt="">
+
+        <!-- Date pill -->
+        <div class="bod-date-section">
+          <div class="bod-date-pill">
+            <span>Tomorrow</span>
+            <span>22:00</span>
+          </div>
+        </div>
+
+        <!-- Event section with gradient + badges -->
+        <div class="bod-event-section">
+          <div class="bod-badge-double">
+            <div class="bod-badges-row">
+              <!-- Super Odds (icon only) -->
+              <div class="bod-badge bod-badge--offer">
+                <div class="bod-badge__lead bod-badge__lead--offer">
+                  <div class="bod-badge__icon"><img src="icon-so.svg" alt="SO"></div>
+                </div>
+                <div class="bod-badge__end"><img src="assets/tmp_svg_4.svg" alt=""></div>
+              </div>
+              <!-- 25% BB Boost -->
+              <div class="bod-badge bod-badge--bb-boost">
+                <div class="bod-badge__lead bod-badge__lead--bb-boost">
+                  <div class="bod-badge__icon"><img src="icon-boost.svg" alt=""></div>
+                  <span class="bod-badge__text">25% BB Boost</span>
+                </div>
+                <div class="bod-badge__end"><img src="assets/tmp_svg_8.svg" alt=""></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bod-main-content">
+            <div class="bod-participants">
+              <div class="bod-team">
+                <img class="bod-team__logo" src="assets/c2352417-101d-4b97-a4ec-18932b4f4e40.png" alt="Crystal Palace">
+                <span class="bod-team__name">Crystal Palace</span>
+              </div>
+              <div class="bod-team">
+                <img class="bod-team__logo" src="assets/2a82f0f9-99f0-4950-8595-c23f63671c1d.png" alt="Chelsea FC">
+                <span class="bod-team__name">Chelsea FC</span>
+              </div>
+            </div>
+            <div class="bod-selections">
+              <button class="bod-sel-btn" type="button">
+                <span class="bod-sel-btn__label">1</span>
+                <span class="bod-sel-btn__odds">1.92</span>
+              </button>
+              <button class="bod-sel-btn" type="button">
+                <span class="bod-sel-btn__label">X</span>
+                <span class="bod-sel-btn__odds">3.45</span>
+              </button>
+              <button class="bod-sel-btn" type="button">
+                <span class="bod-sel-btn__label">2</span>
+                <span class="bod-sel-btn__odds">4.10</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Stories Carousel ─────────────────────────── -->
+    <div class="stories-section">
+      <div class="stories-carousel">
+
+        <!-- Brazil - Peru -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/93f91c2d-03f3-4fb7-acc4-d2fffccb84bb.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="icon-sport-soccer.svg" alt=""></div>
+          <span class="story-thumb__label">Brazil - Peru</span>
+        </div>
+
+        <!-- Missions (wide) -->
+        <div class="story-thumb story-thumb--wide">
+          <img class="story-thumb__bg" src="assets/79ef061e-5dba-4813-8c12-60b0927780ba.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__tag">
+            <span class="story-thumb__tag-text">Missions</span>
+            <div class="story-thumb__notif"><span class="story-thumb__notif-count">3</span></div>
+          </div>
+          <div class="story-thumb__icon"><img src="assets/tmp_svg_12.svg" alt=""></div>
+          <div class="story-thumb__offer-text">
+            <span class="story-thumb__label">Missions</span>
+            <div class="story-thumb__offer-badge">
+              <img src="assets/0633d0c2-4edb-4b2c-8138-6bdf2189f44b.png" alt="">
+              <span class="story-thumb__offer-badge-text">$50 BET CREDIT</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- World Cup Qualifying -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/3067336a-2e0e-4bd6-9ee4-31b3789a2b5a.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="icon-sport-soccer.svg" alt=""></div>
+          <span class="story-thumb__label">World Cup Qualifying</span>
+        </div>
+
+        <!-- Lucky Wheel -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/7e04dbd9-183f-4e62-bae8-28dd28fdf97f.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="icon-fire.svg" alt=""></div>
+          <span class="story-thumb__label">Lucky Wheel</span>
+        </div>
+
+        <!-- Ai Cards -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/9ed45260-5b3d-4bb7-bf29-8e3a0358c8eb.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="assets/tmp_svg_1.svg" alt=""></div>
+          <span class="story-thumb__label">Ai Cards</span>
+        </div>
+
+        <!-- Exclusive Game! -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/499e147d-b826-4604-a86a-bf016220269f.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="icon-offer-badge.svg" alt=""></div>
+          <span class="story-thumb__label">Exclusive Game!</span>
+        </div>
+
+        <!-- Slots Tournament -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/6a8cf14c-c762-4a7f-8031-de30622c42cf.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="icon-cards-spade.png" alt=""></div>
+          <span class="story-thumb__label">Slots Tournament</span>
+        </div>
+
+        <!-- Game of the Week -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/82170720-3948-477c-8771-27bff0e4ee05.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="icon-fire.svg" alt=""></div>
+          <span class="story-thumb__label">Game of the Week</span>
+        </div>
+
+        <!-- Bolão Brazileirão Betano -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/3067336a-2e0e-4bd6-9ee4-31b3789a2b5a.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="icon-sport-soccer.svg" alt=""></div>
+          <span class="story-thumb__label">Bolão Brazileirão Betano</span>
+        </div>
+
+        <!-- Offers Page (with front image) -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/fd4e1c2c-34a5-4d34-bcf0-f9529658e3aa.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <img class="story-thumb__front" src="assets/tmp_img_13.png" alt="">
+          <div class="story-thumb__icon"><img src="icon-offer-badge.svg" alt=""></div>
+          <span class="story-thumb__label">Offers Page</span>
+        </div>
+
+        <!-- Aviator (with front image) -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/2d2142e5-6d53-4479-8ec1-c9e1cde9f019.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <img class="story-thumb__front" src="assets/c78c782a-c924-4661-9b5a-8441f2b65a98.png" alt="">
+          <div class="story-thumb__icon"><img src="icon-cards-spade.png" alt=""></div>
+          <span class="story-thumb__label">Aviator</span>
+        </div>
+
+        <!-- xGoals -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/98f6b8e3-1df5-4e7d-afcf-0fb2e67e1385.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="assets/tmp_svg_1.svg" alt=""></div>
+          <span class="story-thumb__label">xGoals</span>
+        </div>
+
+        <!-- Virtuals -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/3adb9c00-a6a0-4934-bca7-a59a983a8603.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="assets/tmp_img_17.png" alt=""></div>
+          <span class="story-thumb__label">Virtuals</span>
+        </div>
+
+        <!-- Fantasy -->
+        <div class="story-thumb story-thumb--sm">
+          <img class="story-thumb__bg" src="assets/e3e6ec84-54c6-4965-80f9-a633e866d3e4.jpg" alt="">
+          <div class="story-thumb__overlay"></div>
+          <div class="story-thumb__icon"><img src="assets/tmp_img_17.png" alt=""></div>
+          <span class="story-thumb__label">Fantasy</span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ── Popular Leagues Carousel ─────────────────── -->
+    <div class="pop-leagues-section">
+      <div class="pop-leagues-carousel">
+
+        <!-- Row 1 -->
+        <div class="pop-leagues-row">
+
+          <!-- Bet Hub entry point -->
+          <a href="bet-hub-v7.html" class="league-card league-card--bh">
+            <div class="bh-card-inner">
+              <div class="league-card__content">
+                <div class="league-card__lead">
+                  <div class="league-card__lead-bg"></div>
+                  <svg class="league-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M14.511 3.96001C14.4738 3.76737 14.3989 3.58397 14.2907 3.42029C14.1825 3.2566 14.0431 3.11585 13.8805 3.00607C13.7179 2.8963 13.5352 2.81965 13.343 2.78052C13.1507 2.74138 12.9526 2.74053 12.76 2.77801L3.96001 4.48601C3.57166 4.56295 3.22948 4.7903 3.00806 5.11849C2.78664 5.44668 2.70395 5.8491 2.77801 6.23801L5.34101 19.438C5.4165 19.8269 5.64338 20.1699 5.97175 20.3916C6.30011 20.6133 6.70308 20.6954 7.09201 20.62L7.91701 20.46" stroke="#ff3c00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M24.4432 9.11852L14.6892 7.14783C14.148 7.03848 13.6206 7.38859 13.5112 7.92983L10.6531 22.0761C10.5437 22.6174 10.8939 23.1448 11.4351 23.2541L21.189 25.2248C21.7303 25.3342 22.2577 24.9841 22.367 24.4428L25.2252 10.2965C25.3345 9.75528 24.9844 9.22788 24.4432 9.11852Z" stroke="#ff3c00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5.55817 7.21518C5.35106 7.21518 5.18317 7.04729 5.18317 6.84018C5.18317 6.63307 5.35106 6.46518 5.55817 6.46518" stroke="#ff3c00" stroke-width="1.5"/>
+                    <path d="M5.55817 7.21518C5.76527 7.21518 5.93317 7.04729 5.93317 6.84018C5.93317 6.63307 5.76527 6.46518 5.55817 6.46518" stroke="#ff3c00" stroke-width="1.5"/>
+                    <path d="M15.7565 10.4065C15.5494 10.4065 15.3815 10.2386 15.3815 10.0315C15.3815 9.82442 15.5494 9.65652 15.7565 9.65652" stroke="#ff3c00" stroke-width="1.5"/>
+                    <path d="M15.7565 10.4065C15.9636 10.4065 16.1315 10.2386 16.1315 10.0315C16.1315 9.82442 15.9636 9.65652 15.7565 9.65652" stroke="#ff3c00" stroke-width="1.5"/>
+                    <path d="M20.1255 22.7215C19.9184 22.7215 19.7505 22.5536 19.7505 22.3465C19.7505 22.1394 19.9184 21.9715 20.1255 21.9715" stroke="#ff3c00" stroke-width="1.5"/>
+                    <path d="M20.1255 22.7215C20.3326 22.7215 20.5005 22.5536 20.5005 22.3465C20.5005 22.1394 20.3326 21.9715 20.1255 21.9715" stroke="#ff3c00" stroke-width="1.5"/>
+                  </svg>
+                </div>
+                <div class="league-card__info">
+                  <span class="league-card__name">Bet Hub</span>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Braisilerão - Serie A (featured) -->
+          <div class="league-card league-card--featured">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="assets/8b5ff49b-c1f9-4d04-a346-0915e807e951.png" alt="Braisilerão Serie A">
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">Braisilerão - Serie A</span>
+                <div class="league-card__sponsored">
+                  <span class="league-card__sponsored-text">Sponsored by</span>
+                  <img class="league-card__betano-logo" src="logo/betano/new.png" alt="Betano">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Copa Sul-americana -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="assets/02ab2bf9-3766-42cf-9f0a-b8cd4c15312c.png" alt="Copa Sul-americana">
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">Copa Sul-americana</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- La Liga -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="assets/tmp_svg_14.svg" alt="La Liga">
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">La Liga</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- NBA -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="ΝΒΑ.png" alt="NBA">
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">NBA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Geneva (ATP Tennis) -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="ATP.png" alt="ATP">
+                <div class="league-card__sport-badge">
+                  <img src="icon-sport-tennis.svg" alt="Tennis">
+                </div>
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">Geneva</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- WNBA -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="usa.png" alt="USA">
+                <div class="league-card__sport-badge">
+                  <img src="assets/tmp_svg_11.svg" alt="Basketball">
+                </div>
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">WNBA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MLB -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="usa.png" alt="USA">
+                <div class="league-card__sport-badge">
+                  <img src="icon-sport-tennis.svg" alt="Sport">
+                </div>
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">MLB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- NBB -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="assets/5bda1643-223e-433d-a0a5-73dc8d087876.png" alt="NBB">
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">NBB</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /Row 1 -->
+
+        <!-- Row 2 -->
+        <div class="pop-leagues-row">
+
+          <!-- Braisilerão - Serie B -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="assets/a15969f3-d312-4d10-bdd1-b257dbdaa1c2.png" alt="Braisilerão Serie B">
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">Braisilerão - Serie B</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Euroleague -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="Euroleague.png" alt="Euroleague">
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">Euroleague</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hamburg (ATP Tennis) -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="ATP.png" alt="ATP">
+                <div class="league-card__sport-badge">
+                  <img src="icon-sport-tennis.svg" alt="Tennis">
+                </div>
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">Hamburg</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Strasbourg (W) (WTA Tennis) -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="WTA.png" alt="WTA">
+                <div class="league-card__sport-badge">
+                  <img src="icon-sport-tennis.svg" alt="Tennis">
+                </div>
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">Strasbourg (W)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- NHL -->
+          <div class="league-card">
+            <div class="league-card__content">
+              <div class="league-card__lead">
+                <div class="league-card__lead-bg"></div>
+                <img class="league-card__icon" src="usa.png" alt="USA">
+                <div class="league-card__sport-badge">
+                  <img src="icon-sport-tennis.svg" alt="Ice Hockey">
+                </div>
+              </div>
+              <div class="league-card__info">
+                <span class="league-card__name">NHL</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /Row 2 -->
+
+        <!-- Scroll indicator arrow -->
+        <div class="pop-leagues-arrow">
+          <img src="icon-chevron-right.svg" alt="">
+        </div>
+
+      </div>
+    </div><!-- /Popular Leagues -->
+
+    <!-- ── Join the Action ───────────────────────────── -->
+    <div class="join-action-section">
+
+      <!-- Header -->
+      <div class="join-action-header">
+        <span class="join-action-title">Join the Action</span>
+        <div class="join-action-filters">
+          <!-- Live chip -->
+          <button class="join-filter-chip" type="button">
+            <span class="join-filter-chip__icon">
+              <img src="icon-live.svg" alt="">
+            </span>
+            Live
+          </button>
+          <!-- Upcoming chip -->
+          <button class="join-filter-chip" type="button">
+            <span class="upcoming-icon-wrap">
+              <img src="icon-chevron-right.svg" alt="" style="inset:3.65% 36.98% 86.98% 36.98%; position:absolute; width:auto; height:auto; max-width:none;">
+              <img src="icon-chevron-right.svg" alt="" style="inset:41.15% 32.81% 36.98% 45.31%; position:absolute; width:auto; height:auto; max-width:none;">
+              <img src="icon-chevron-right.svg" alt="" style="inset:20.31% 11.98% 3.64% 11.98%; position:absolute; width:auto; height:auto; max-width:none;">
+            </span>
+            Upcoming
+          </button>
+        </div>
+      </div>
+
+      <!-- Sports picker bar -->
+      <div class="join-action-sports-bar">
+        <!-- All Sports (active/selected) -->
+        <div class="sport-tab sport-tab--active">
+          <img class="sport-tab__icon" src="assets/tmp_svg_18.svg" alt="All Sports">
+          <span class="sport-tab__label">All Sports</span>
+        </div>
+        <!-- Scrollable sport tabs -->
+        <div class="sport-tabs-scroll">
+          <div class="sport-tab">
+            <img class="sport-tab__icon" src="icon-sport-soccer.svg" alt="Soccer">
+            <span class="sport-tab__label">Soccer</span>
+          </div>
+          <div class="sport-tab">
+            <img class="sport-tab__icon" src="assets/tmp_svg_11.svg" alt="Basketball">
+            <span class="sport-tab__label">Basketball</span>
+          </div>
+          <div class="sport-tab">
+            <img class="sport-tab__icon" src="icon-sport-tennis.svg" alt="Tennis">
+            <span class="sport-tab__label">Tennis</span>
+          </div>
+          <div class="sport-tab">
+            <img class="sport-tab__icon" src="assets/tmp_svg_11.svg" alt="Baseball">
+            <span class="sport-tab__label">Baseball</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Cards -->
+      <div class="join-action-cards">
+
+        <!-- Card 1: Barcelona vs Bayern Munich -->
+        <div class="event-card">
+          <div class="event-card__top-row">
+            <div class="event-card__match-info">
+              <div class="event-card__time"><span>18/6</span><span>18:00</span></div>
+            </div>
+          </div>
+          <div class="event-card__participants">
+            <div class="event-card__team-row">
+              <span class="event-card__team-name">Barcelona</span>
+              <div class="event-card__rc"><div class="event-card__rc-card"></div></div>
+            </div>
+            <div class="event-card__team-row">
+              <span class="event-card__team-name">Bayern Munich</span>
+            </div>
+          </div>
+          <div class="event-card__market-title">Next Team to Score (Goal 2)</div>
+          <div class="event-card__odds-row">
+            <div class="sel-btn"><span class="sel-btn__label">Barcelona</span><span class="sel-btn__odds">2.30</span></div>
+            <div class="sel-btn"><span class="sel-btn__label">No Goal</span><span class="sel-btn__odds">3.30</span></div>
+            <div class="sel-btn"><span class="sel-btn__label">Bayern Munich</span><span class="sel-btn__odds">2.30</span></div>
+          </div>
+        </div>
+
+        <!-- Card 2: SL Benfica vs Real Sociedad -->
+        <div class="event-card">
+          <div class="event-card__top-row">
+            <div class="event-card__match-info">
+              <div class="event-card__time"><span>18/6</span><span>18:00</span></div>
+              <div class="event-card__divider-v"></div>
+              <div class="event-card__meta-icons">
+                <img class="event-card__meta-icon" src="assets/tmp_svg_3.svg" alt="TV">
+                <img class="event-card__meta-icon" src="icon-offer-badge.svg" alt="Offer">
+              </div>
+            </div>
+            <div class="event-card__tappable">
+              <img class="event-card__meta-icon" src="assets/tmp_svg_9.svg" alt="Lineups">
+              <img class="event-card__meta-icon" src="assets/tmp_svg_16.svg" alt="Stats">
+            </div>
+          </div>
+          <div class="event-card__participants">
+            <div class="event-card__team-row">
+              <span class="event-card__team-name">SL Benfica</span>
+              <div class="event-card__rc">
+                <div class="event-card__rc-card"></div>
+                <span class="event-card__rc-num">2</span>
+              </div>
+            </div>
+            <div class="event-card__team-row">
+              <span class="event-card__team-name">Real Sociedad</span>
+            </div>
+          </div>
+          <div class="event-card__odds-row">
+            <div class="sel-btn"><span class="sel-btn__label">1</span><span class="sel-btn__odds">7.33</span></div>
+            <div class="sel-btn"><span class="sel-btn__label">X</span><span class="sel-btn__odds">3.44</span></div>
+            <div class="sel-btn"><span class="sel-btn__label">2</span><span class="sel-btn__odds">1.37</span></div>
+          </div>
+        </div>
+
+        <!-- Card 3: USA - WNBA (W) Six-pack -->
+        <div class="event-card">
+          <div class="sixpack-header">
+            <div class="sixpack-league-info">
+              <div class="sixpack-league-icons">
+                <div class="sixpack-league-icon"><img src="assets/tmp_svg_11.svg" alt="Basketball"></div>
+                <div class="sixpack-league-icon"><img src="usa.png" alt="USA"></div>
+              </div>
+              <span class="sixpack-league-name">USA - WNBA (W)</span>
+            </div>
+            <div class="sixpack-col-headers">
+              <span class="sixpack-col-header">Moneyline</span>
+              <span class="sixpack-col-header">Spread</span>
+              <span class="sixpack-col-header">Total</span>
+            </div>
+          </div>
+          <div class="sixpack-divider"></div>
+          <div class="sixpack-body">
+            <div class="sixpack-teams-col">
+              <div class="sixpack-top-info">
+                <div class="sixpack-time"><span>18/6</span><span>18:00</span></div>
+                <div class="event-card__divider-v"></div>
+                <div class="event-card__meta-icons">
+                  <img class="event-card__meta-icon" src="assets/tmp_svg_3.svg" alt="TV">
+                  <img class="event-card__meta-icon" src="icon-offer-badge.svg" alt="Offer">
+                </div>
+              </div>
+              <div class="sixpack-participants">
+                <span class="sixpack-team-name">Golden State Valkyries (W)</span>
+                <div class="sixpack-team-divider"></div>
+                <span class="sixpack-team-name">Seattle Storm (W)</span>
+              </div>
+              <div class="sixpack-bottom-actions">
+                <img class="event-card__meta-icon" src="assets/tmp_svg_16.svg" alt="Stats">
+                <img class="event-card__meta-icon" src="assets/tmp_svg_9.svg" alt="Lineups">
+              </div>
+            </div>
+            <div class="sixpack-odds-col">
+              <div class="sixpack-market-col">
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__odds">-114</span></div>
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__odds">-108</span></div>
+              </div>
+              <div class="sixpack-market-col">
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__label">-1.5</span><span class="sel-btn__odds">+130</span></div>
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__label">+1.5</span><span class="sel-btn__odds">-175</span></div>
+              </div>
+              <div class="sixpack-market-col">
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__label">O 10.5</span><span class="sel-btn__odds">-133</span></div>
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__label">U 10.5</span><span class="sel-btn__odds">+100</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: NBA - Phoenix Suns vs Golden State Warriors Six-pack -->
+        <div class="event-card">
+          <div class="sixpack-header">
+            <div class="sixpack-league-info">
+              <div class="sixpack-league-icons">
+                <div class="sixpack-league-icon"><img src="assets/tmp_svg_11.svg" alt="Basketball"></div>
+                <div class="sixpack-league-icon"><img src="usa.png" alt="USA"></div>
+              </div>
+              <span class="sixpack-league-name">NBA</span>
+            </div>
+            <div class="sixpack-col-headers">
+              <span class="sixpack-col-header">Moneyline</span>
+              <span class="sixpack-col-header">Spread</span>
+              <span class="sixpack-col-header">Total</span>
+            </div>
+          </div>
+          <div class="sixpack-divider"></div>
+          <div class="sixpack-body">
+            <div class="sixpack-teams-col">
+              <div class="sixpack-top-info">
+                <div class="sixpack-time"><span>18/6</span><span>18:00</span></div>
+                <div class="event-card__divider-v"></div>
+                <div class="event-card__meta-icons">
+                  <img class="event-card__meta-icon" src="assets/tmp_svg_3.svg" alt="TV">
+                  <img class="event-card__meta-icon" src="icon-offer-badge.svg" alt="Offer">
+                </div>
+              </div>
+              <div class="sixpack-participants">
+                <span class="sixpack-team-name">Phoenix Suns</span>
+                <div class="sixpack-team-divider"></div>
+                <span class="sixpack-team-name">Golden State Warriors</span>
+              </div>
+              <div class="sixpack-bottom-actions">
+                <img class="event-card__meta-icon" src="assets/tmp_svg_16.svg" alt="Stats">
+                <img class="event-card__meta-icon" src="assets/tmp_svg_9.svg" alt="Lineups">
+              </div>
+            </div>
+            <div class="sixpack-odds-col">
+              <div class="sixpack-market-col">
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__odds">2.67</span></div>
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__odds">1.50</span></div>
+              </div>
+              <div class="sixpack-market-col">
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__label">+3.5</span><span class="sel-btn__odds">1.83</span></div>
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__label">-3.5</span><span class="sel-btn__odds">1.91</span></div>
+              </div>
+              <div class="sixpack-market-col">
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__label">O 159.5</span><span class="sel-btn__odds">1.83</span></div>
+                <div class="sel-btn sel-btn--tall"><span class="sel-btn__label">U 159.5</span><span class="sel-btn__odds">1.90</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /event cards -->
+    </div><!-- /Join the Action -->
+
+
+        <!-- ── Section: Trending Accas ─────────────────── -->
+    <div class="home-section">
+      <div class="section-header" style="padding-top: 16px;">
+        <h2 class="section-title">Trending Accas</h2>
+        <a href="bet-hub-v7.html?filter=accas" class="section-cta">
+          Go to Bet Hub
+          <img class="section-cta__icon" src="icon-arrow-right.svg" alt="">
+        </a>
+      </div>
+      <div class="acca-cards">
+
+        <!-- Card 1: Hot Selections -->
+        <div class="acca-card">
+          <div class="acca-card__grad-corner"></div>
+          <div class="acca-card__bar">
+            <div class="acca-card__bar-left"><span class="acca-card__label">Hot Selections</span></div>
+            <svg class="acca-card__bar-curve" viewBox="0 0 8 32" height="32" width="8"><path d="M-0.000207934 6.99382e-07L7.00175 1.31151e-06C2.92956 3.50536 -2.16787 13.1455 0.977329 23.0684C1.64182 19.6808 3.21385 18.2043 3.2371 18.1826C3.23713 18.2316 3.24575 25.5218 5.89237 31.9795C5.89662 31.9862 5.90082 31.9933 5.90506 32L7.99979 31.9795V32H-0.000210732L-0.000207934 6.99382e-07Z" fill="#2b303b"/></svg>
+            <div class="acca-card__price-badge"><span class="acca-card__badge-value">5.40</span></div>
+          </div>
+          <div class="acca-card__body">
+            <div class="acca-card__receipt"><div class="bet-rows">
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-tennis.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Feldbauser - Match Winner</span>
+                    <span class="bet-row__fixture">Feldbauser vs Kecmanovic</span>
+                  </div>
+                  <div class="bet-row__odds">1.87</div>
+                </div>
+                <div class="bet-row__meta">
+                  <span class="bet-row__date">13/07 12:40</span>
+                  <div class="bet-row__trending"><img class="bet-row__fire" src="icon-fire.svg" alt=""><span class="bet-row__trending-label">4k+ bets</span></div>
+                </div>
+                <div class="bet-row__separator"></div>
+              </div>
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Bulleen Lions - Match Result</span>
+                    <span class="bet-row__fixture">Bulleen Lions - Brunswick City</span>
+                  </div>
+                  <div class="bet-row__odds">1.95</div>
+                </div>
+                <div class="bet-row__meta"><span class="bet-row__date">13/07 13:30</span></div>
+                <div class="bet-row__separator"></div>
+              </div>
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">FC Honka - Match Result</span>
+                    <span class="bet-row__fixture">FC Honka - HJS Akatemia</span>
+                  </div>
+                  <div class="bet-row__odds">1.50</div>
+                </div>
+                <div class="bet-row__meta">
+                  <span class="bet-row__date">13/07 18:30</span>
+                  <div class="bet-row__trending"><img class="bet-row__fire" src="icon-fire.svg" alt=""><span class="bet-row__trending-label">1k+ bets</span></div>
+                </div>
+              </div>
+            </div></div>
+            <div class="acca-card__cta">
+              <button class="betslip-btn" type="button"><span class="betslip-btn__text">ADD TO BETSLIP</span><svg class="betslip-btn__arrow" viewBox="0 0 11 10" width="11" height="10" fill="currentColor"><path d="M5.94262 0.108447C5.8773 0.152688 5.82149 0.209545 5.77846 0.275676C5.73544 0.341805 5.70607 0.415874 5.6921 0.49352C5.67812 0.571166 5.67981 0.650823 5.69708 0.727804C5.71434 0.804787 5.74683 0.877539 5.79262 0.94178L8.53429 4.88761C8.55686 4.92079 8.56893 4.95999 8.56893 5.00011C8.56893 5.04024 8.55686 5.07944 8.53429 5.11261L5.79262 9.05845C5.71401 9.18896 5.688 9.3445 5.71986 9.4935C5.75173 9.64249 5.83908 9.77378 5.9642 9.86073C6.08932 9.94768 6.24283 9.98377 6.39359 9.96168C6.54434 9.93959 6.68104 9.86097 6.77596 9.74178L9.51762 5.80011C9.68052 5.56514 9.7678 5.28603 9.7678 5.00011C9.7678 4.71419 9.68052 4.43509 9.51762 4.20011L6.77596 0.258448C6.73134 0.193574 6.67431 0.138186 6.60816 0.0954847C6.54201 0.052784 6.46806 0.0236178 6.39057 0.00966931C6.31308 -0.00427818 6.2336 -0.00273036 6.15671 0.0142241C6.07982 0.0311785 6.00706 0.0632029 5.94262 0.108447Z"/><path d="M3.63332 9.6292L6.37915 5.68336C6.51765 5.4824 6.59182 5.2441 6.59182 5.00003C6.59182 4.75596 6.51765 4.51766 6.37915 4.3167L3.63332 0.370865C3.59749 0.317739 3.54905 0.274325 3.49233 0.244513C3.43562 0.214699 3.37239 0.199416 3.30832 0.200031L1.96665 0.200031C1.89383 0.202033 1.8228 0.223093 1.76066 0.26111C1.69851 0.299128 1.64742 0.352774 1.61248 0.416698C1.58024 0.482573 1.56596 0.555789 1.57109 0.62895C1.57621 0.702111 1.60055 0.772624 1.64165 0.833364L4.38332 4.77086C4.42812 4.8389 4.452 4.91857 4.452 5.00003C4.452 5.08149 4.42812 5.16116 4.38332 5.2292L1.64165 9.1667C1.60055 9.22744 1.57621 9.29795 1.57109 9.37111C1.56596 9.44427 1.58024 9.51749 1.61248 9.58336C1.64742 9.64729 1.69851 9.70093 1.76066 9.73895C1.8228 9.77697 1.89383 9.79803 1.96665 9.80003L3.30832 9.80003C3.37239 9.80065 3.43562 9.78536 3.49233 9.75555C3.54905 9.72574 3.59749 9.68232 3.63332 9.6292Z"/></svg><span class="betslip-btn__odds">5.40</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Trending Combos -->
+        <div class="acca-card">
+          <div class="acca-card__grad-corner"></div>
+          <div class="acca-card__bar">
+            <div class="acca-card__bar-left"><span class="acca-card__label">Trending Combos</span></div>
+            <svg class="acca-card__bar-curve" viewBox="0 0 8 32" height="32" width="8"><path d="M-0.000207934 6.99382e-07L7.00175 1.31151e-06C2.92956 3.50536 -2.16787 13.1455 0.977329 23.0684C1.64182 19.6808 3.21385 18.2043 3.2371 18.1826C3.23713 18.2316 3.24575 25.5218 5.89237 31.9795C5.89662 31.9862 5.90082 31.9933 5.90506 32L7.99979 31.9795V32H-0.000210732L-0.000207934 6.99382e-07Z" fill="#2b303b"/></svg>
+            <div class="acca-card__price-badge"><span class="acca-card__badge-value">14.55</span></div>
+          </div>
+          <div class="acca-card__body">
+            <div class="acca-card__receipt"><div class="bet-rows">
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Atlanta - Match Result</span>
+                    <span class="bet-row__fixture">Club Atletico Atlanta - Colegiales</span>
+                  </div>
+                  <div class="bet-row__odds">1.87</div>
+                </div>
+                <div class="bet-row__meta">
+                  <span class="bet-row__date">20/07 19:45</span>
+                  <div class="bet-row__trending"><img class="bet-row__fire" src="icon-fire.svg" alt=""><span class="bet-row__trending-label">4k+ bets</span></div>
+                </div>
+                <div class="bet-row__separator"></div>
+              </div>
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Newcastle United - Match Result</span>
+                    <span class="bet-row__fixture">Newcastle United - Arsenal</span>
+                  </div>
+                  <div class="bet-row__odds">1.50</div>
+                </div>
+                <div class="bet-row__meta"><span class="bet-row__date">20/07 19:45</span></div>
+                <div class="bet-row__separator"></div>
+              </div>
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Man City - Match Result</span>
+                    <span class="bet-row__fixture">Man City - Liverpool</span>
+                  </div>
+                  <div class="bet-row__odds">1.24</div>
+                </div>
+                <div class="bet-row__meta">
+                  <span class="bet-row__date">20/07 19:45</span>
+                  <div class="bet-row__trending"><img class="bet-row__fire" src="icon-fire.svg" alt=""><span class="bet-row__trending-label">200k+ bets</span></div>
+                </div>
+              </div>
+            </div></div>
+            <div class="acca-card__cta">
+              <button class="betslip-btn" type="button"><span class="betslip-btn__text">ADD TO BETSLIP</span><svg class="betslip-btn__arrow" viewBox="0 0 11 10" width="11" height="10" fill="currentColor"><path d="M5.94262 0.108447C5.8773 0.152688 5.82149 0.209545 5.77846 0.275676C5.73544 0.341805 5.70607 0.415874 5.6921 0.49352C5.67812 0.571166 5.67981 0.650823 5.69708 0.727804C5.71434 0.804787 5.74683 0.877539 5.79262 0.94178L8.53429 4.88761C8.55686 4.92079 8.56893 4.95999 8.56893 5.00011C8.56893 5.04024 8.55686 5.07944 8.53429 5.11261L5.79262 9.05845C5.71401 9.18896 5.688 9.3445 5.71986 9.4935C5.75173 9.64249 5.83908 9.77378 5.9642 9.86073C6.08932 9.94768 6.24283 9.98377 6.39359 9.96168C6.54434 9.93959 6.68104 9.86097 6.77596 9.74178L9.51762 5.80011C9.68052 5.56514 9.7678 5.28603 9.7678 5.00011C9.7678 4.71419 9.68052 4.43509 9.51762 4.20011L6.77596 0.258448C6.73134 0.193574 6.67431 0.138186 6.60816 0.0954847C6.54201 0.052784 6.46806 0.0236178 6.39057 0.00966931C6.31308 -0.00427818 6.2336 -0.00273036 6.15671 0.0142241C6.07982 0.0311785 6.00706 0.0632029 5.94262 0.108447Z"/><path d="M3.63332 9.6292L6.37915 5.68336C6.51765 5.4824 6.59182 5.2441 6.59182 5.00003C6.59182 4.75596 6.51765 4.51766 6.37915 4.3167L3.63332 0.370865C3.59749 0.317739 3.54905 0.274325 3.49233 0.244513C3.43562 0.214699 3.37239 0.199416 3.30832 0.200031L1.96665 0.200031C1.89383 0.202033 1.8228 0.223093 1.76066 0.26111C1.69851 0.299128 1.64742 0.352774 1.61248 0.416698C1.58024 0.482573 1.56596 0.555789 1.57109 0.62895C1.57621 0.702111 1.60055 0.772624 1.64165 0.833364L4.38332 4.77086C4.42812 4.8389 4.452 4.91857 4.452 5.00003C4.452 5.08149 4.42812 5.16116 4.38332 5.2292L1.64165 9.1667C1.60055 9.22744 1.57621 9.29795 1.57109 9.37111C1.56596 9.44427 1.58024 9.51749 1.61248 9.58336C1.64742 9.64729 1.69851 9.70093 1.76066 9.73895C1.8228 9.77697 1.89383 9.79803 1.96665 9.80003L3.30832 9.80003C3.37239 9.80065 3.43562 9.78536 3.49233 9.75555C3.54905 9.72574 3.59749 9.68232 3.63332 9.6292Z"/></svg><span class="betslip-btn__odds">14.55</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Goal Fest -->
+        <div class="acca-card">
+          <div class="acca-card__grad-corner"></div>
+          <div class="acca-card__bar">
+            <div class="acca-card__bar-left"><span class="acca-card__label">Goal Fest</span></div>
+            <svg class="acca-card__bar-curve" viewBox="0 0 8 32" height="32" width="8"><path d="M-0.000207934 6.99382e-07L7.00175 1.31151e-06C2.92956 3.50536 -2.16787 13.1455 0.977329 23.0684C1.64182 19.6808 3.21385 18.2043 3.2371 18.1826C3.23713 18.2316 3.24575 25.5218 5.89237 31.9795C5.89662 31.9862 5.90082 31.9933 5.90506 32L7.99979 31.9795V32H-0.000210732L-0.000207934 6.99382e-07Z" fill="#2b303b"/></svg>
+            <div class="acca-card__price-badge"><span class="acca-card__badge-value">9.80</span></div>
+          </div>
+          <div class="acca-card__body">
+            <div class="acca-card__receipt"><div class="bet-rows">
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Real Madrid - Match Result</span>
+                    <span class="bet-row__fixture">Real Madrid - Barcelona</span>
+                  </div>
+                  <div class="bet-row__odds">2.10</div>
+                </div>
+                <div class="bet-row__meta">
+                  <span class="bet-row__date">14/07 17:30</span>
+                  <div class="bet-row__trending"><img class="bet-row__fire" src="icon-fire.svg" alt=""><span class="bet-row__trending-label">12k+ bets</span></div>
+                </div>
+                <div class="bet-row__separator"></div>
+              </div>
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">PSG - Match Result</span>
+                    <span class="bet-row__fixture">PSG - Marseille</span>
+                  </div>
+                  <div class="bet-row__odds">1.65</div>
+                </div>
+                <div class="bet-row__meta"><span class="bet-row__date">14/07 20:00</span></div>
+                <div class="bet-row__separator"></div>
+              </div>
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Dortmund - Match Result</span>
+                    <span class="bet-row__fixture">Dortmund - Bayern Munich</span>
+                  </div>
+                  <div class="bet-row__odds">2.85</div>
+                </div>
+                <div class="bet-row__meta"><span class="bet-row__date">15/07 18:30</span></div>
+              </div>
+            </div></div>
+            <div class="acca-card__cta">
+              <button class="betslip-btn" type="button"><span class="betslip-btn__text">ADD TO BETSLIP</span><svg class="betslip-btn__arrow" viewBox="0 0 11 10" width="11" height="10" fill="currentColor"><path d="M5.94262 0.108447C5.8773 0.152688 5.82149 0.209545 5.77846 0.275676C5.73544 0.341805 5.70607 0.415874 5.6921 0.49352C5.67812 0.571166 5.67981 0.650823 5.69708 0.727804C5.71434 0.804787 5.74683 0.877539 5.79262 0.94178L8.53429 4.88761C8.55686 4.92079 8.56893 4.95999 8.56893 5.00011C8.56893 5.04024 8.55686 5.07944 8.53429 5.11261L5.79262 9.05845C5.71401 9.18896 5.688 9.3445 5.71986 9.4935C5.75173 9.64249 5.83908 9.77378 5.9642 9.86073C6.08932 9.94768 6.24283 9.98377 6.39359 9.96168C6.54434 9.93959 6.68104 9.86097 6.77596 9.74178L9.51762 5.80011C9.68052 5.56514 9.7678 5.28603 9.7678 5.00011C9.7678 4.71419 9.68052 4.43509 9.51762 4.20011L6.77596 0.258448C6.73134 0.193574 6.67431 0.138186 6.60816 0.0954847C6.54201 0.052784 6.46806 0.0236178 6.39057 0.00966931C6.31308 -0.00427818 6.2336 -0.00273036 6.15671 0.0142241C6.07982 0.0311785 6.00706 0.0632029 5.94262 0.108447Z"/><path d="M3.63332 9.6292L6.37915 5.68336C6.51765 5.4824 6.59182 5.2441 6.59182 5.00003C6.59182 4.75596 6.51765 4.51766 6.37915 4.3167L3.63332 0.370865C3.59749 0.317739 3.54905 0.274325 3.49233 0.244513C3.43562 0.214699 3.37239 0.199416 3.30832 0.200031L1.96665 0.200031C1.89383 0.202033 1.8228 0.223093 1.76066 0.26111C1.69851 0.299128 1.64742 0.352774 1.61248 0.416698C1.58024 0.482573 1.56596 0.555789 1.57109 0.62895C1.57621 0.702111 1.60055 0.772624 1.64165 0.833364L4.38332 4.77086C4.42812 4.8389 4.452 4.91857 4.452 5.00003C4.452 5.08149 4.42812 5.16116 4.38332 5.2292L1.64165 9.1667C1.60055 9.22744 1.57621 9.29795 1.57109 9.37111C1.56596 9.44427 1.58024 9.51749 1.61248 9.58336C1.64742 9.64729 1.69851 9.70093 1.76066 9.73895C1.8228 9.77697 1.89383 9.79803 1.96665 9.80003L3.30832 9.80003C3.37239 9.80065 3.43562 9.78536 3.49233 9.75555C3.54905 9.72574 3.59749 9.68232 3.63332 9.6292Z"/></svg><span class="betslip-btn__odds">9.80</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Weekend Special -->
+        <div class="acca-card">
+          <div class="acca-card__grad-corner"></div>
+          <div class="acca-card__bar">
+            <div class="acca-card__bar-left"><span class="acca-card__label">Weekend Special</span></div>
+            <svg class="acca-card__bar-curve" viewBox="0 0 8 32" height="32" width="8"><path d="M-0.000207934 6.99382e-07L7.00175 1.31151e-06C2.92956 3.50536 -2.16787 13.1455 0.977329 23.0684C1.64182 19.6808 3.21385 18.2043 3.2371 18.1826C3.23713 18.2316 3.24575 25.5218 5.89237 31.9795C5.89662 31.9862 5.90082 31.9933 5.90506 32L7.99979 31.9795V32H-0.000210732L-0.000207934 6.99382e-07Z" fill="#2b303b"/></svg>
+            <div class="acca-card__price-badge"><span class="acca-card__badge-value">6.75</span></div>
+          </div>
+          <div class="acca-card__body">
+            <div class="acca-card__receipt"><div class="bet-rows">
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Arsenal - Match Result</span>
+                    <span class="bet-row__fixture">Arsenal - Chelsea</span>
+                  </div>
+                  <div class="bet-row__odds">1.72</div>
+                </div>
+                <div class="bet-row__meta">
+                  <span class="bet-row__date">13/07 17:30</span>
+                  <div class="bet-row__trending"><img class="bet-row__fire" src="icon-fire.svg" alt=""><span class="bet-row__trending-label">8k+ bets</span></div>
+                </div>
+                <div class="bet-row__separator"></div>
+              </div>
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Juventus - Match Result</span>
+                    <span class="bet-row__fixture">Juventus - Inter Milan</span>
+                  </div>
+                  <div class="bet-row__odds">2.30</div>
+                </div>
+                <div class="bet-row__meta"><span class="bet-row__date">13/07 20:45</span></div>
+                <div class="bet-row__separator"></div>
+              </div>
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Ajax - Match Result</span>
+                    <span class="bet-row__fixture">Ajax - PSV Eindhoven</span>
+                  </div>
+                  <div class="bet-row__odds">1.70</div>
+                </div>
+                <div class="bet-row__meta"><span class="bet-row__date">14/07 19:00</span></div>
+              </div>
+            </div></div>
+            <div class="acca-card__cta">
+              <button class="betslip-btn" type="button"><span class="betslip-btn__text">ADD TO BETSLIP</span><svg class="betslip-btn__arrow" viewBox="0 0 11 10" width="11" height="10" fill="currentColor"><path d="M5.94262 0.108447C5.8773 0.152688 5.82149 0.209545 5.77846 0.275676C5.73544 0.341805 5.70607 0.415874 5.6921 0.49352C5.67812 0.571166 5.67981 0.650823 5.69708 0.727804C5.71434 0.804787 5.74683 0.877539 5.79262 0.94178L8.53429 4.88761C8.55686 4.92079 8.56893 4.95999 8.56893 5.00011C8.56893 5.04024 8.55686 5.07944 8.53429 5.11261L5.79262 9.05845C5.71401 9.18896 5.688 9.3445 5.71986 9.4935C5.75173 9.64249 5.83908 9.77378 5.9642 9.86073C6.08932 9.94768 6.24283 9.98377 6.39359 9.96168C6.54434 9.93959 6.68104 9.86097 6.77596 9.74178L9.51762 5.80011C9.68052 5.56514 9.7678 5.28603 9.7678 5.00011C9.7678 4.71419 9.68052 4.43509 9.51762 4.20011L6.77596 0.258448C6.73134 0.193574 6.67431 0.138186 6.60816 0.0954847C6.54201 0.052784 6.46806 0.0236178 6.39057 0.00966931C6.31308 -0.00427818 6.2336 -0.00273036 6.15671 0.0142241C6.07982 0.0311785 6.00706 0.0632029 5.94262 0.108447Z"/><path d="M3.63332 9.6292L6.37915 5.68336C6.51765 5.4824 6.59182 5.2441 6.59182 5.00003C6.59182 4.75596 6.51765 4.51766 6.37915 4.3167L3.63332 0.370865C3.59749 0.317739 3.54905 0.274325 3.49233 0.244513C3.43562 0.214699 3.37239 0.199416 3.30832 0.200031L1.96665 0.200031C1.89383 0.202033 1.8228 0.223093 1.76066 0.26111C1.69851 0.299128 1.64742 0.352774 1.61248 0.416698C1.58024 0.482573 1.56596 0.555789 1.57109 0.62895C1.57621 0.702111 1.60055 0.772624 1.64165 0.833364L4.38332 4.77086C4.42812 4.8389 4.452 4.91857 4.452 5.00003C4.452 5.08149 4.42812 5.16116 4.38332 5.2292L1.64165 9.1667C1.60055 9.22744 1.57621 9.29795 1.57109 9.37111C1.56596 9.44427 1.58024 9.51749 1.61248 9.58336C1.64742 9.64729 1.69851 9.70093 1.76066 9.73895C1.8228 9.77697 1.89383 9.79803 1.96665 9.80003L3.30832 9.80003C3.37239 9.80065 3.43562 9.78536 3.49233 9.75555C3.54905 9.72574 3.59749 9.68232 3.63332 9.6292Z"/></svg><span class="betslip-btn__odds">6.75</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Champions League -->
+        <div class="acca-card">
+          <div class="acca-card__grad-corner"></div>
+          <div class="acca-card__bar">
+            <div class="acca-card__bar-left"><span class="acca-card__label">Champions League</span></div>
+            <svg class="acca-card__bar-curve" viewBox="0 0 8 32" height="32" width="8"><path d="M-0.000207934 6.99382e-07L7.00175 1.31151e-06C2.92956 3.50536 -2.16787 13.1455 0.977329 23.0684C1.64182 19.6808 3.21385 18.2043 3.2371 18.1826C3.23713 18.2316 3.24575 25.5218 5.89237 31.9795C5.89662 31.9862 5.90082 31.9933 5.90506 32L7.99979 31.9795V32H-0.000210732L-0.000207934 6.99382e-07Z" fill="#2b303b"/></svg>
+            <div class="acca-card__price-badge"><span class="acca-card__badge-value">22.40</span></div>
+          </div>
+          <div class="acca-card__body">
+            <div class="acca-card__receipt"><div class="bet-rows">
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Man City - Match Result</span>
+                    <span class="bet-row__fixture">Man City - Real Madrid</span>
+                  </div>
+                  <div class="bet-row__odds">2.60</div>
+                </div>
+                <div class="bet-row__meta">
+                  <span class="bet-row__date">15/07 21:00</span>
+                  <div class="bet-row__trending"><img class="bet-row__fire" src="icon-fire.svg" alt=""><span class="bet-row__trending-label">25k+ bets</span></div>
+                </div>
+                <div class="bet-row__separator"></div>
+              </div>
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Bayern Munich - Match Result</span>
+                    <span class="bet-row__fixture">Bayern Munich - Arsenal</span>
+                  </div>
+                  <div class="bet-row__odds">3.20</div>
+                </div>
+                <div class="bet-row__meta"><span class="bet-row__date">15/07 21:00</span></div>
+                <div class="bet-row__separator"></div>
+              </div>
+              <div class="bet-row">
+                <div class="bet-row__main">
+                  <div class="bet-row__sport-icon-wrap"><img class="bet-row__sport-icon" src="icon-sport-soccer.svg" alt=""></div>
+                  <div class="bet-row__event">
+                    <span class="bet-row__selection">Atletico Madrid - Match Result</span>
+                    <span class="bet-row__fixture">Atletico Madrid - Liverpool</span>
+                  </div>
+                  <div class="bet-row__odds">2.70</div>
+                </div>
+                <div class="bet-row__meta"><span class="bet-row__date">16/07 21:00</span></div>
+              </div>
+            </div></div>
+            <div class="acca-card__cta">
+              <button class="betslip-btn" type="button"><span class="betslip-btn__text">ADD TO BETSLIP</span><svg class="betslip-btn__arrow" viewBox="0 0 11 10" width="11" height="10" fill="currentColor"><path d="M5.94262 0.108447C5.8773 0.152688 5.82149 0.209545 5.77846 0.275676C5.73544 0.341805 5.70607 0.415874 5.6921 0.49352C5.67812 0.571166 5.67981 0.650823 5.69708 0.727804C5.71434 0.804787 5.74683 0.877539 5.79262 0.94178L8.53429 4.88761C8.55686 4.92079 8.56893 4.95999 8.56893 5.00011C8.56893 5.04024 8.55686 5.07944 8.53429 5.11261L5.79262 9.05845C5.71401 9.18896 5.688 9.3445 5.71986 9.4935C5.75173 9.64249 5.83908 9.77378 5.9642 9.86073C6.08932 9.94768 6.24283 9.98377 6.39359 9.96168C6.54434 9.93959 6.68104 9.86097 6.77596 9.74178L9.51762 5.80011C9.68052 5.56514 9.7678 5.28603 9.7678 5.00011C9.7678 4.71419 9.68052 4.43509 9.51762 4.20011L6.77596 0.258448C6.73134 0.193574 6.67431 0.138186 6.60816 0.0954847C6.54201 0.052784 6.46806 0.0236178 6.39057 0.00966931C6.31308 -0.00427818 6.2336 -0.00273036 6.15671 0.0142241C6.07982 0.0311785 6.00706 0.0632029 5.94262 0.108447Z"/><path d="M3.63332 9.6292L6.37915 5.68336C6.51765 5.4824 6.59182 5.2441 6.59182 5.00003C6.59182 4.75596 6.51765 4.51766 6.37915 4.3167L3.63332 0.370865C3.59749 0.317739 3.54905 0.274325 3.49233 0.244513C3.43562 0.214699 3.37239 0.199416 3.30832 0.200031L1.96665 0.200031C1.89383 0.202033 1.8228 0.223093 1.76066 0.26111C1.69851 0.299128 1.64742 0.352774 1.61248 0.416698C1.58024 0.482573 1.56596 0.555789 1.57109 0.62895C1.57621 0.702111 1.60055 0.772624 1.64165 0.833364L4.38332 4.77086C4.42812 4.8389 4.452 4.91857 4.452 5.00003C4.452 5.08149 4.42812 5.16116 4.38332 5.2292L1.64165 9.1667C1.60055 9.22744 1.57621 9.29795 1.57109 9.37111C1.56596 9.44427 1.58024 9.51749 1.61248 9.58336C1.64742 9.64729 1.69851 9.70093 1.76066 9.73895C1.8228 9.77697 1.89383 9.79803 1.96665 9.80003L3.30832 9.80003C3.37239 9.80065 3.43562 9.78536 3.49233 9.75555C3.54905 9.72574 3.59749 9.68232 3.63332 9.6292Z"/></svg><span class="betslip-btn__odds">22.40</span></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /Trending Accas -->
+
+    <!-- ── Section: Star Players ────────────────────── -->
+    <div class="home-section">
+      <div class="section-header">
+        <h2 class="section-title">Star Players</h2>
+        <a href="bet-hub-v7.html?filter=starPlayers" class="section-cta">
+          Go to Bet Hub
+          <img class="section-cta__icon" src="icon-arrow-right.svg" alt="">
+        </a>
+      </div>
+      <div class="sp-cards">
+
+        <!-- SP Card 1: Harry Kane -->
+        <div class="sp-card">
+          <div class="sp-card__bb-boost">
+            <img class="sp-card__bb-boost-bg" src="assets/6bb3fee0-e249-443d-aec0-1206c7573c7b.svg" alt="">
+            <div class="sp-card__bb-boost-content">
+              <img class="sp-card__bb-boost-icon" src="assets/d48ae96e-a90d-4218-be20-91bf8f989ed7.svg" alt="">
+              <span class="sp-card__bb-boost-label">BB BOOST</span>
+            </div>
+          </div>
+          <div class="sp-card__social-proof">
+            <span class="sp-card__sp-fire">🔥</span>
+            <span class="sp-card__sp-count">100+</span>
+          </div>
+          <div class="sp-card__inner">
+            <div class="sp-card__bg" style="background:#A31B1B">
+              <div class="sp-card__overlay"></div>
+            </div>
+            <div class="sp-card__jersey">
+              <div class="sp-card__jersey-wrap">
+                <img class="sp-card__jersey-img" src="img-sp-kit-aston-villa.png" alt="">
+                <span class="sp-card__jersey-number">9</span>
+              </div>
+            </div>
+            <div class="sp-card__match-indicator" style="background:#7B1010">
+              <div class="sp-card__match-logo"><img src="img-team-logo-bayern.png" alt="Bayern Munich"></div>
+              <div class="sp-card__match-divider"></div>
+              <div class="sp-card__match-logo"><img src="img-team-logo-bayer.png" alt="Bayer Leverkusen"></div>
+            </div>
+            <div class="sp-card__player-info">
+              <span class="sp-card__player-name">Harry Kane</span>
+              <span class="sp-card__match-text">Bayern Munich - Bayer Leverkusen</span>
+            </div>
+            <div class="sp-card__content">
+              <div class="sp-markets">
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div><div class="sp-bb-line"></div></div>
+                  <div class="sp-market-row__text">Match Result - <b>Germany</b></div>
+                </div>
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div><div class="sp-bb-line"></div></div>
+                  <div class="sp-market-row__text">Total Goals Over/Under - <b>Over 2.5</b></div>
+                </div>
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div></div>
+                  <div class="sp-market-row__text">Harry Kane Anytime Goalscorer - <b>Yes</b></div>
+                </div>
+              </div>
+            </div>
+            <button class="sp-odds-btn" type="button">3.20</button>
+          </div>
+        </div>
+
+        <!-- SP Card 2: Mohamed Salah -->
+        <div class="sp-card">
+          <div class="sp-card__bb-boost">
+            <img class="sp-card__bb-boost-bg" src="assets/6bb3fee0-e249-443d-aec0-1206c7573c7b.svg" alt="">
+            <div class="sp-card__bb-boost-content">
+              <img class="sp-card__bb-boost-icon" src="assets/d48ae96e-a90d-4218-be20-91bf8f989ed7.svg" alt="">
+              <span class="sp-card__bb-boost-label">BB BOOST</span>
+            </div>
+          </div>
+          <div class="sp-card__social-proof">
+            <span class="sp-card__sp-fire">🔥</span>
+            <span class="sp-card__sp-count">100+</span>
+          </div>
+          <div class="sp-card__inner">
+            <div class="sp-card__bg" style="background:#C8102E">
+              <div class="sp-card__overlay"></div>
+            </div>
+            <div class="sp-card__jersey">
+              <div class="sp-card__jersey-wrap">
+                <img class="sp-card__jersey-img" src="img-sp-kit-aston-villa.png" alt="">
+                <span class="sp-card__jersey-number">11</span>
+              </div>
+            </div>
+            <div class="sp-card__match-indicator" style="background:#9A0C23">
+              <div class="sp-card__match-logo"><img src="img-team-logo-bayern.png" alt="Liverpool"></div>
+              <div class="sp-card__match-divider"></div>
+              <div class="sp-card__match-logo"><img src="img-team-logo-bayer.png" alt="Man City"></div>
+            </div>
+            <div class="sp-card__player-info">
+              <span class="sp-card__player-name">Mohamed Salah</span>
+              <span class="sp-card__match-text">Liverpool - Man City</span>
+            </div>
+            <div class="sp-card__content">
+              <div class="sp-markets">
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div><div class="sp-bb-line"></div></div>
+                  <div class="sp-market-row__text">Match Result - <b>England</b></div>
+                </div>
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div><div class="sp-bb-line"></div></div>
+                  <div class="sp-market-row__text">Total Corners Over/Under - <b>Over 9.5</b></div>
+                </div>
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div></div>
+                  <div class="sp-market-row__text">Salah Shots on Target - <b>2+</b></div>
+                </div>
+              </div>
+            </div>
+            <button class="sp-odds-btn" type="button">2.75</button>
+          </div>
+        </div>
+
+        <!-- SP Card 3: Erling Haaland -->
+        <div class="sp-card">
+          <div class="sp-card__bb-boost">
+            <img class="sp-card__bb-boost-bg" src="assets/6bb3fee0-e249-443d-aec0-1206c7573c7b.svg" alt="">
+            <div class="sp-card__bb-boost-content">
+              <img class="sp-card__bb-boost-icon" src="assets/d48ae96e-a90d-4218-be20-91bf8f989ed7.svg" alt="">
+              <span class="sp-card__bb-boost-label">BB BOOST</span>
+            </div>
+          </div>
+          <div class="sp-card__social-proof">
+            <span class="sp-card__sp-fire">🔥</span>
+            <span class="sp-card__sp-count">100+</span>
+          </div>
+          <div class="sp-card__inner">
+            <div class="sp-card__bg" style="background:#1A5276">
+              <div class="sp-card__overlay"></div>
+            </div>
+            <div class="sp-card__jersey">
+              <div class="sp-card__jersey-wrap">
+                <img class="sp-card__jersey-img" src="img-sp-kit-aston-villa.png" alt="">
+                <span class="sp-card__jersey-number">9</span>
+              </div>
+            </div>
+            <div class="sp-card__match-indicator" style="background:#154360">
+              <div class="sp-card__match-logo"><img src="img-team-logo-bayern.png" alt="Man City"></div>
+              <div class="sp-card__match-divider"></div>
+              <div class="sp-card__match-logo"><img src="img-team-logo-bayer.png" alt="Arsenal"></div>
+            </div>
+            <div class="sp-card__player-info">
+              <span class="sp-card__player-name">Erling Haaland</span>
+              <span class="sp-card__match-text">Man City - Arsenal</span>
+            </div>
+            <div class="sp-card__content">
+              <div class="sp-markets">
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div><div class="sp-bb-line"></div></div>
+                  <div class="sp-market-row__text">Match Result - <b>Man City</b></div>
+                </div>
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div><div class="sp-bb-line"></div></div>
+                  <div class="sp-market-row__text">Total Goals Over/Under - <b>Over 3.5</b></div>
+                </div>
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div></div>
+                  <div class="sp-market-row__text">Haaland Anytime Goalscorer - <b>Yes</b></div>
+                </div>
+              </div>
+            </div>
+            <button class="sp-odds-btn" type="button">1.95</button>
+          </div>
+        </div>
+
+        <!-- SP Card 4: Kylian Mbappé -->
+        <div class="sp-card">
+          <div class="sp-card__bb-boost">
+            <img class="sp-card__bb-boost-bg" src="assets/6bb3fee0-e249-443d-aec0-1206c7573c7b.svg" alt="">
+            <div class="sp-card__bb-boost-content">
+              <img class="sp-card__bb-boost-icon" src="assets/d48ae96e-a90d-4218-be20-91bf8f989ed7.svg" alt="">
+              <span class="sp-card__bb-boost-label">BB BOOST</span>
+            </div>
+          </div>
+          <div class="sp-card__social-proof">
+            <span class="sp-card__sp-fire">🔥</span>
+            <span class="sp-card__sp-count">100+</span>
+          </div>
+          <div class="sp-card__inner">
+            <div class="sp-card__bg" style="background:#00205B">
+              <div class="sp-card__overlay"></div>
+            </div>
+            <div class="sp-card__jersey">
+              <div class="sp-card__jersey-wrap">
+                <img class="sp-card__jersey-img" src="img-sp-kit-aston-villa.png" alt="">
+                <span class="sp-card__jersey-number">9</span>
+              </div>
+            </div>
+            <div class="sp-card__match-indicator" style="background:#001240">
+              <div class="sp-card__match-logo"><img src="img-team-logo-bayern.png" alt="Real Madrid"></div>
+              <div class="sp-card__match-divider"></div>
+              <div class="sp-card__match-logo"><img src="img-team-logo-bayer.png" alt="Atlético Madrid"></div>
+            </div>
+            <div class="sp-card__player-info">
+              <span class="sp-card__player-name">Kylian Mbappé</span>
+              <span class="sp-card__match-text">Real Madrid - Atlético</span>
+            </div>
+            <div class="sp-card__content">
+              <div class="sp-markets">
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div><div class="sp-bb-line"></div></div>
+                  <div class="sp-market-row__text">Match Result - <b>Real Madrid</b></div>
+                </div>
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div><div class="sp-bb-line"></div></div>
+                  <div class="sp-market-row__text">Both Teams to Score - <b>Yes</b></div>
+                </div>
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div></div>
+                  <div class="sp-market-row__text">Mbappé 2+ Goals - <b>Yes</b></div>
+                </div>
+              </div>
+            </div>
+            <button class="sp-odds-btn" type="button">4.10</button>
+          </div>
+        </div>
+
+        <!-- SP Card 5: Vinicius Jr -->
+        <div class="sp-card">
+          <div class="sp-card__bb-boost">
+            <img class="sp-card__bb-boost-bg" src="assets/6bb3fee0-e249-443d-aec0-1206c7573c7b.svg" alt="">
+            <div class="sp-card__bb-boost-content">
+              <img class="sp-card__bb-boost-icon" src="assets/d48ae96e-a90d-4218-be20-91bf8f989ed7.svg" alt="">
+              <span class="sp-card__bb-boost-label">BB BOOST</span>
+            </div>
+          </div>
+          <div class="sp-card__social-proof">
+            <span class="sp-card__sp-fire">🔥</span>
+            <span class="sp-card__sp-count">100+</span>
+          </div>
+          <div class="sp-card__inner">
+            <div class="sp-card__bg" style="background:#1A3462">
+              <div class="sp-card__overlay"></div>
+            </div>
+            <div class="sp-card__jersey">
+              <div class="sp-card__jersey-wrap">
+                <img class="sp-card__jersey-img" src="img-sp-kit-aston-villa.png" alt="">
+                <span class="sp-card__jersey-number">7</span>
+              </div>
+            </div>
+            <div class="sp-card__match-indicator" style="background:#0F2040">
+              <div class="sp-card__match-logo"><img src="img-team-logo-bayern.png" alt="Real Madrid"></div>
+              <div class="sp-card__match-divider"></div>
+              <div class="sp-card__match-logo"><img src="img-team-logo-bayer.png" alt="Barcelona"></div>
+            </div>
+            <div class="sp-card__player-info">
+              <span class="sp-card__player-name">Vinicius Jr</span>
+              <span class="sp-card__match-text">Real Madrid - Barcelona</span>
+            </div>
+            <div class="sp-card__content">
+              <div class="sp-markets">
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div><div class="sp-bb-line"></div></div>
+                  <div class="sp-market-row__text">Match Result - <b>Real Madrid</b></div>
+                </div>
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div><div class="sp-bb-line"></div></div>
+                  <div class="sp-market-row__text">Total Corners Over/Under - <b>Over 8.5</b></div>
+                </div>
+                <div class="sp-market-row">
+                  <div class="sp-market-row__indicator"><div class="sp-bb-dot"></div></div>
+                  <div class="sp-market-row__text">Vinicius Shots on Target - <b>3+</b></div>
+                </div>
+              </div>
+            </div>
+            <button class="sp-odds-btn" type="button">3.55</button>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /Star Players -->
+
+    <!-- ── Section: Enhanced ────────────────────────── -->
+    <div class="home-section">
+      <div class="section-header">
+        <h2 class="section-title">Enhanced</h2>
+        <a href="bet-hub-v7.html?filter=primePicks" class="section-cta">
+          Go to Bet Hub
+          <img class="section-cta__icon" src="icon-arrow-right.svg" alt="">
+        </a>
+      </div>
+      <div class="offer-cards">
+
+        <!-- Offer Card 1 -->
+        <div class="offer-card">
+          <div class="offer-card__brand-vector" aria-hidden="true">
+            <svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 332 124" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M307.662 78.3492L318.237 45.934L220.599 59.6015L231.13 27.2214L182.357 34.019L193.326 0.39062L168.554 3.86279L97.0976 13.8846L101.627 0H0V12.2229L19.0941 9.56295L8.5656 41.943L106.201 28.2755L95.6264 60.6907L168.523 50.6731V50.671L192.931 47.2526L182.357 79.6699L231.13 72.8722L220.599 105.252L318.237 91.5848L307.662 124L332 120.656V75.0052L307.662 78.3492Z" fill="#ECEFF9" fill-opacity="0.65"/></svg>
+          </div>
+          <div class="offer-card__badges">
+            <div class="offer-badges">
+              <div class="offer-badge">
+                <div class="offer-badge__lead" style="background:linear-gradient(257.45deg,rgb(138,102,255) 0%,rgb(98,51,255) 68.96%)">
+                  <div class="offer-badge__icon"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M2.8125 3.65625C2.8125 3.19026 3.19026 2.8125 3.65625 2.8125H7.00466C7.29237 2.8125 7.56024 2.9591 7.71533 3.20142L11.8055 9.59231C12.0191 9.9261 11.9717 10.3636 11.6914 10.6438L10.6438 11.6914C10.3636 11.9717 9.9261 12.0191 9.59231 11.8055L3.20142 7.71533C2.9591 7.56024 2.8125 7.29237 2.8125 7.00466V3.65625ZM6.75 5.625C6.75 6.24632 6.24632 6.75 5.625 6.75C5.00368 6.75 4.5 6.24632 4.5 5.625C4.5 5.00368 5.00368 4.5 5.625 4.5C6.24632 4.5 6.75 5.00368 6.75 5.625ZM14.7041 10.1194L12.9095 10.3745C12.9745 10.0884 12.9271 9.77968 12.76 9.51857L11.0748 6.88531L12.6994 6.65327C12.8984 6.62486 13.0974 6.70475 13.2214 6.86285L15.0675 9.21521C15.1916 9.37339 15.2219 9.58573 15.1469 9.77226C15.072 9.95878 14.9032 10.0911 14.7041 10.1194ZM6.65322 12.6993L6.88525 11.0747L9.51857 12.76C9.77968 12.9271 10.0884 12.9745 10.3744 12.9095L10.1194 14.7041C10.0911 14.9032 9.95878 15.072 9.77226 15.1469C9.58573 15.2219 9.37339 15.1916 9.21527 15.0675L6.8628 13.2214C6.70469 13.0973 6.6248 12.8983 6.65322 12.6993ZM15.1875 15.1875C15.1875 15.1875 15.0289 12.6405 14.3697 11.9812C14.0532 11.6647 13.6239 11.4869 13.1763 11.4869C12.7288 11.4869 12.2995 11.6647 11.983 11.9812C11.6665 12.2978 11.4887 12.727 11.4887 13.1746C11.4887 13.3962 11.5323 13.6157 11.6171 13.8205C11.702 14.0252 11.8263 14.2112 11.983 14.3679C12.6422 15.0272 15.1875 15.1875 15.1875 15.1875Z" fill="white"/></svg></div>
+                  <span class="offer-badge__text">10% Enhanced</span>
+                </div>
+                <div class="offer-badge__end"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 4 22" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 22L0 0H4L0 22Z" fill="#8A66FF"/></svg></div>
+              </div>
+              <div class="offer-badge-info">
+                <div class="offer-badge-info__container"><div class="offer-badge-info__icon"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 7C5.5 7.276 5.276 7.5 5 7.5C4.724 7.5 4.5 7.276 4.5 7V4.5C4.5 4.224 4.724 4 5 4C5.276 4 5.5 4.224 5.5 4.5V7ZM5.5 3C5.5 3.276 5.276 3.5 5 3.5C4.724 3.5 4.5 3.276 4.5 3C4.5 2.724 4.724 2.5 5 2.5C5.276 2.5 5.5 2.724 5.5 3ZM5 1C7.2055 1 9 2.7945 9 5C9 7.2055 7.2055 9 5 9C2.7945 9 1 7.2055 1 5C1 2.7945 2.7945 1 5 1ZM5 10C7.7615 10 10 7.7615 10 5C10 2.2385 7.7615 0 5 0C2.2385 0 0 2.2385 0 5C0 7.7615 2.2385 10 5 10Z" fill="#121217"/></svg></div></div>
+                <div class="offer-badge-info__vector"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 20V0H4L0 20Z" fill="#F4F7FA"/></svg></div>
+              </div>
+            </div>
+            <div class="offer-social-proof">
+              <div class="offer-social-proof__fire"><img src="icon-fire.svg" alt=""></div>
+              <span class="offer-social-proof__count">2.5k</span>
+            </div>
+          </div>
+          <div class="offer-card__content">
+            <div class="offer-date"><div class="offer-date__sport"><img src="icon-sport-soccer.svg" alt=""></div><span class="offer-date__text">THU 12/11 18:45</span></div>
+            <div class="offer-participants">
+              <div class="offer-team offer-team--a"><span class="offer-team__name">West Ham United</span></div>
+              <div class="offer-logos">
+                <div class="offer-logo-bubble"><img src="assets/tmp_img_16.png" alt="West Ham"></div>
+                <div class="offer-logo-bubble"><img src="img-team-logo-bayern.png" alt="Wolves"></div>
+              </div>
+              <div class="offer-team offer-team--b"><span class="offer-team__name">Wolverhampton Wanderers</span></div>
+            </div>
+            <div class="offer-markets"><div class="offer-market-content">
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder.svg" alt=""></div><div class="offer-market-row__text">Jarrod Bowen Shots on Target - <b>1+</b></div></div>
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder.svg" alt=""></div><div class="offer-market-row__text">Over/Under Total Goals - <b>Over 2.5</b></div></div>
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder-last.svg" alt=""></div><div class="offer-market-row__text">Over/Under Corners - <b>Over 9.5</b></div></div>
+            </div></div>
+          </div>
+          <div class="offer-card__footer">
+            <button class="offer-odds-btn" type="button">
+              <span class="offer-odds-btn__old">4.80</span>
+              <span class="offer-odds-btn__new">5.28</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Offer Card 2 -->
+        <div class="offer-card">
+          <div class="offer-card__brand-vector" aria-hidden="true"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 332 124" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M307.662 78.3492L318.237 45.934L220.599 59.6015L231.13 27.2214L182.357 34.019L193.326 0.39062L168.554 3.86279L97.0976 13.8846L101.627 0H0V12.2229L19.0941 9.56295L8.5656 41.943L106.201 28.2755L95.6264 60.6907L168.523 50.6731V50.671L192.931 47.2526L182.357 79.6699L231.13 72.8722L220.599 105.252L318.237 91.5848L307.662 124L332 120.656V75.0052L307.662 78.3492Z" fill="#ECEFF9" fill-opacity="0.65"/></svg></div>
+          <div class="offer-card__badges">
+            <div class="offer-badges">
+              <div class="offer-badge">
+                <div class="offer-badge__lead" style="background:linear-gradient(77.22deg,rgb(165,25,193) 0%,rgb(255,0,66) 99.54%)"><div class="offer-badge__icon"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M2.8125 3.65625C2.8125 3.19026 3.19026 2.8125 3.65625 2.8125H7.00466C7.29237 2.8125 7.56024 2.9591 7.71533 3.20142L11.8055 9.59231C12.0191 9.9261 11.9717 10.3636 11.6914 10.6438L10.6438 11.6914C10.3636 11.9717 9.9261 12.0191 9.59231 11.8055L3.20142 7.71533C2.9591 7.56024 2.8125 7.29237 2.8125 7.00466V3.65625ZM6.75 5.625C6.75 6.24632 6.24632 6.75 5.625 6.75C5.00368 6.75 4.5 6.24632 4.5 5.625C4.5 5.00368 5.00368 4.5 5.625 4.5C6.24632 4.5 6.75 5.00368 6.75 5.625ZM14.7041 10.1194L12.9095 10.3745C12.9745 10.0884 12.9271 9.77968 12.76 9.51857L11.0748 6.88531L12.6994 6.65327C12.8984 6.62486 13.0974 6.70475 13.2214 6.86285L15.0675 9.21521C15.1916 9.37339 15.2219 9.58573 15.1469 9.77226C15.072 9.95878 14.9032 10.0911 14.7041 10.1194ZM6.65322 12.6993L6.88525 11.0747L9.51857 12.76C9.77968 12.9271 10.0884 12.9745 10.3744 12.9095L10.1194 14.7041C10.0911 14.9032 9.95878 15.072 9.77226 15.1469C9.58573 15.2219 9.37339 15.1916 9.21527 15.0675L6.8628 13.2214C6.70469 13.0973 6.6248 12.8983 6.65322 12.6993ZM15.1875 15.1875C15.1875 15.1875 15.0289 12.6405 14.3697 11.9812C14.0532 11.6647 13.6239 11.4869 13.1763 11.4869C12.7288 11.4869 12.2995 11.6647 11.983 11.9812C11.6665 12.2978 11.4887 12.727 11.4887 13.1746C11.4887 13.3962 11.5323 13.6157 11.6171 13.8205C11.702 14.0252 11.8263 14.2112 11.983 14.3679C12.6422 15.0272 15.1875 15.1875 15.1875 15.1875Z" fill="white"/></svg></div><span class="offer-badge__text">20% Super Enhanced</span></div>
+                <div class="offer-badge__end"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 4 22" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 22L0 0H4L0 22Z" fill="#A519C1"/></svg></div>
+              </div>
+              <div class="offer-badge-info"><div class="offer-badge-info__container"><div class="offer-badge-info__icon"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 7C5.5 7.276 5.276 7.5 5 7.5C4.724 7.5 4.5 7.276 4.5 7V4.5C4.5 4.224 4.724 4 5 4C5.276 4 5.5 4.224 5.5 4.5V7ZM5.5 3C5.5 3.276 5.276 3.5 5 3.5C4.724 3.5 4.5 3.276 4.5 3C4.5 2.724 4.724 2.5 5 2.5C5.276 2.5 5.5 2.724 5.5 3ZM5 1C7.2055 1 9 2.7945 9 5C9 7.2055 7.2055 9 5 9C2.7945 9 1 7.2055 1 5C1 2.7945 2.7945 1 5 1ZM5 10C7.7615 10 10 7.7615 10 5C10 2.2385 7.7615 0 5 0C2.2385 0 0 2.2385 0 5C0 7.7615 2.2385 10 5 10Z" fill="#121217"/></svg></div></div><div class="offer-badge-info__vector"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 20V0H4L0 20Z" fill="#F4F7FA"/></svg></div></div>
+            </div>
+            <div class="offer-social-proof"><div class="offer-social-proof__fire"><img src="icon-fire.svg" alt=""></div><span class="offer-social-proof__count">3.1k</span></div>
+          </div>
+          <div class="offer-card__content">
+            <div class="offer-date"><div class="offer-date__sport"><img src="icon-sport-tennis.svg" alt=""></div><span class="offer-date__text">SUN 14/07 14:00</span></div>
+            <div class="offer-participants">
+              <div class="offer-team offer-team--a"><span class="offer-team__name">Carlos Alcaraz</span></div>
+              <div class="offer-logos"><div class="offer-logo-bubble"><img src="img-team-logo-bayern.png" alt="Alcaraz"></div><div class="offer-logo-bubble"><img src="img-team-logo-bayer.png" alt="Sinner"></div></div>
+              <div class="offer-team offer-team--b"><span class="offer-team__name">Jannik Sinner</span></div>
+            </div>
+            <div class="offer-markets"><div class="offer-market-content">
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder.svg" alt=""></div><div class="offer-market-row__text">Alcaraz to Win - <b>Yes</b></div></div>
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder.svg" alt=""></div><div class="offer-market-row__text">Total Sets Over/Under - <b>Over 3.5</b></div></div>
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder-last.svg" alt=""></div><div class="offer-market-row__text">Alcaraz Aces 10+ - <b>Yes</b></div></div>
+            </div></div>
+          </div>
+          <div class="offer-card__footer"><button class="offer-odds-btn" type="button"><span class="offer-odds-btn__old">3.20</span><span class="offer-odds-btn__new">4.00</span></button></div>
+        </div>
+
+        <!-- Offer Card 3 -->
+        <div class="offer-card">
+          <div class="offer-card__brand-vector" aria-hidden="true"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 332 124" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M307.662 78.3492L318.237 45.934L220.599 59.6015L231.13 27.2214L182.357 34.019L193.326 0.39062L168.554 3.86279L97.0976 13.8846L101.627 0H0V12.2229L19.0941 9.56295L8.5656 41.943L106.201 28.2755L95.6264 60.6907L168.523 50.6731V50.671L192.931 47.2526L182.357 79.6699L231.13 72.8722L220.599 105.252L318.237 91.5848L307.662 124L332 120.656V75.0052L307.662 78.3492Z" fill="#ECEFF9" fill-opacity="0.65"/></svg></div>
+          <div class="offer-card__badges">
+            <div class="offer-badges">
+              <div class="offer-badge">
+                <div class="offer-badge__lead" style="background:linear-gradient(257.45deg,rgb(255,107,0) 0%,rgb(255,60,0) 68.96%)"><div class="offer-badge__icon"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M2.8125 3.65625C2.8125 3.19026 3.19026 2.8125 3.65625 2.8125H7.00466C7.29237 2.8125 7.56024 2.9591 7.71533 3.20142L11.8055 9.59231C12.0191 9.9261 11.9717 10.3636 11.6914 10.6438L10.6438 11.6914C10.3636 11.9717 9.9261 12.0191 9.59231 11.8055L3.20142 7.71533C2.9591 7.56024 2.8125 7.29237 2.8125 7.00466V3.65625ZM6.75 5.625C6.75 6.24632 6.24632 6.75 5.625 6.75C5.00368 6.75 4.5 6.24632 4.5 5.625C4.5 5.00368 5.00368 4.5 5.625 4.5C6.24632 4.5 6.75 5.00368 6.75 5.625ZM14.7041 10.1194L12.9095 10.3745C12.9745 10.0884 12.9271 9.77968 12.76 9.51857L11.0748 6.88531L12.6994 6.65327C12.8984 6.62486 13.0974 6.70475 13.2214 6.86285L15.0675 9.21521C15.1916 9.37339 15.2219 9.58573 15.1469 9.77226C15.072 9.95878 14.9032 10.0911 14.7041 10.1194ZM6.65322 12.6993L6.88525 11.0747L9.51857 12.76C9.77968 12.9271 10.0884 12.9745 10.3744 12.9095L10.1194 14.7041C10.0911 14.9032 9.95878 15.072 9.77226 15.1469C9.58573 15.2219 9.37339 15.1916 9.21527 15.0675L6.8628 13.2214C6.70469 13.0973 6.6248 12.8983 6.65322 12.6993ZM15.1875 15.1875C15.1875 15.1875 15.0289 12.6405 14.3697 11.9812C14.0532 11.6647 13.6239 11.4869 13.1763 11.4869C12.7288 11.4869 12.2995 11.6647 11.983 11.9812C11.6665 12.2978 11.4887 12.727 11.4887 13.1746C11.4887 13.3962 11.5323 13.6157 11.6171 13.8205C11.702 14.0252 11.8263 14.2112 11.983 14.3679C12.6422 15.0272 15.1875 15.1875 15.1875 15.1875Z" fill="white"/></svg></div><span class="offer-badge__text">15% Enhanced</span></div>
+                <div class="offer-badge__end"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 4 22" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 22L0 0H4L0 22Z" fill="#FF6B00"/></svg></div>
+              </div>
+              <div class="offer-badge-info"><div class="offer-badge-info__container"><div class="offer-badge-info__icon"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 7C5.5 7.276 5.276 7.5 5 7.5C4.724 7.5 4.5 7.276 4.5 7V4.5C4.5 4.224 4.724 4 5 4C5.276 4 5.5 4.224 5.5 4.5V7ZM5.5 3C5.5 3.276 5.276 3.5 5 3.5C4.724 3.5 4.5 3.276 4.5 3C4.5 2.724 4.724 2.5 5 2.5C5.276 2.5 5.5 2.724 5.5 3ZM5 1C7.2055 1 9 2.7945 9 5C9 7.2055 7.2055 9 5 9C2.7945 9 1 7.2055 1 5C1 2.7945 2.7945 1 5 1ZM5 10C7.7615 10 10 7.7615 10 5C10 2.2385 7.7615 0 5 0C2.2385 0 0 2.2385 0 5C0 7.7615 2.2385 10 5 10Z" fill="#121217"/></svg></div></div><div class="offer-badge-info__vector"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 20V0H4L0 20Z" fill="#F4F7FA"/></svg></div></div>
+            </div>
+            <div class="offer-social-proof"><div class="offer-social-proof__fire"><img src="icon-fire.svg" alt=""></div><span class="offer-social-proof__count">1.8k</span></div>
+          </div>
+          <div class="offer-card__content">
+            <div class="offer-date"><div class="offer-date__sport"><img src="icon-sport-soccer.svg" alt=""></div><span class="offer-date__text">FRI 13/07 20:00</span></div>
+            <div class="offer-participants">
+              <div class="offer-team offer-team--a"><span class="offer-team__name">Arsenal</span></div>
+              <div class="offer-logos"><div class="offer-logo-bubble"><img src="img-team-logo-bayern.png" alt="Arsenal"></div><div class="offer-logo-bubble"><img src="img-team-logo-bayer.png" alt="Chelsea"></div></div>
+              <div class="offer-team offer-team--b"><span class="offer-team__name">Chelsea</span></div>
+            </div>
+            <div class="offer-markets"><div class="offer-market-content">
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder.svg" alt=""></div><div class="offer-market-row__text">Match Result - <b>Arsenal</b></div></div>
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder.svg" alt=""></div><div class="offer-market-row__text">Saka Anytime Goalscorer - <b>Yes</b></div></div>
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder-last.svg" alt=""></div><div class="offer-market-row__text">Total Goals Over/Under - <b>Over 2.5</b></div></div>
+            </div></div>
+          </div>
+          <div class="offer-card__footer"><button class="offer-odds-btn" type="button"><span class="offer-odds-btn__old">5.50</span><span class="offer-odds-btn__new">6.33</span></button></div>
+        </div>
+
+        <!-- Offer Card 4 -->
+        <div class="offer-card">
+          <div class="offer-card__brand-vector" aria-hidden="true"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 332 124" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M307.662 78.3492L318.237 45.934L220.599 59.6015L231.13 27.2214L182.357 34.019L193.326 0.39062L168.554 3.86279L97.0976 13.8846L101.627 0H0V12.2229L19.0941 9.56295L8.5656 41.943L106.201 28.2755L95.6264 60.6907L168.523 50.6731V50.671L192.931 47.2526L182.357 79.6699L231.13 72.8722L220.599 105.252L318.237 91.5848L307.662 124L332 120.656V75.0052L307.662 78.3492Z" fill="#ECEFF9" fill-opacity="0.65"/></svg></div>
+          <div class="offer-card__badges">
+            <div class="offer-badges">
+              <div class="offer-badge">
+                <div class="offer-badge__lead" style="background:linear-gradient(257.45deg,rgb(0,180,130) 0%,rgb(0,140,100) 68.96%)"><div class="offer-badge__icon"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M2.8125 3.65625C2.8125 3.19026 3.19026 2.8125 3.65625 2.8125H7.00466C7.29237 2.8125 7.56024 2.9591 7.71533 3.20142L11.8055 9.59231C12.0191 9.9261 11.9717 10.3636 11.6914 10.6438L10.6438 11.6914C10.3636 11.9717 9.9261 12.0191 9.59231 11.8055L3.20142 7.71533C2.9591 7.56024 2.8125 7.29237 2.8125 7.00466V3.65625ZM6.75 5.625C6.75 6.24632 6.24632 6.75 5.625 6.75C5.00368 6.75 4.5 6.24632 4.5 5.625C4.5 5.00368 5.00368 4.5 5.625 4.5C6.24632 4.5 6.75 5.00368 6.75 5.625ZM14.7041 10.1194L12.9095 10.3745C12.9745 10.0884 12.9271 9.77968 12.76 9.51857L11.0748 6.88531L12.6994 6.65327C12.8984 6.62486 13.0974 6.70475 13.2214 6.86285L15.0675 9.21521C15.1916 9.37339 15.2219 9.58573 15.1469 9.77226C15.072 9.95878 14.9032 10.0911 14.7041 10.1194ZM6.65322 12.6993L6.88525 11.0747L9.51857 12.76C9.77968 12.9271 10.0884 12.9745 10.3744 12.9095L10.1194 14.7041C10.0911 14.9032 9.95878 15.072 9.77226 15.1469C9.58573 15.2219 9.37339 15.1916 9.21527 15.0675L6.8628 13.2214C6.70469 13.0973 6.6248 12.8983 6.65322 12.6993ZM15.1875 15.1875C15.1875 15.1875 15.0289 12.6405 14.3697 11.9812C14.0532 11.6647 13.6239 11.4869 13.1763 11.4869C12.7288 11.4869 12.2995 11.6647 11.983 11.9812C11.6665 12.2978 11.4887 12.727 11.4887 13.1746C11.4887 13.3962 11.5323 13.6157 11.6171 13.8205C11.702 14.0252 11.8263 14.2112 11.983 14.3679C12.6422 15.0272 15.1875 15.1875 15.1875 15.1875Z" fill="white"/></svg></div><span class="offer-badge__text">10% Enhanced</span></div>
+                <div class="offer-badge__end"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 4 22" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 22L0 0H4L0 22Z" fill="#00B482"/></svg></div>
+              </div>
+              <div class="offer-badge-info"><div class="offer-badge-info__container"><div class="offer-badge-info__icon"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 7C5.5 7.276 5.276 7.5 5 7.5C4.724 7.5 4.5 7.276 4.5 7V4.5C4.5 4.224 4.724 4 5 4C5.276 4 5.5 4.224 5.5 4.5V7ZM5.5 3C5.5 3.276 5.276 3.5 5 3.5C4.724 3.5 4.5 3.276 4.5 3C4.5 2.724 4.724 2.5 5 2.5C5.276 2.5 5.5 2.724 5.5 3ZM5 1C7.2055 1 9 2.7945 9 5C9 7.2055 7.2055 9 5 9C2.7945 9 1 7.2055 1 5C1 2.7945 2.7945 1 5 1ZM5 10C7.7615 10 10 7.7615 10 5C10 2.2385 7.7615 0 5 0C2.2385 0 0 2.2385 0 5C0 7.7615 2.2385 10 5 10Z" fill="#121217"/></svg></div></div><div class="offer-badge-info__vector"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 20V0H4L0 20Z" fill="#F4F7FA"/></svg></div></div>
+            </div>
+            <div class="offer-social-proof"><div class="offer-social-proof__fire"><img src="icon-fire.svg" alt=""></div><span class="offer-social-proof__count">4.2k</span></div>
+          </div>
+          <div class="offer-card__content">
+            <div class="offer-date"><div class="offer-date__sport"><img src="icon-sport-soccer.svg" alt=""></div><span class="offer-date__text">SAT 14/07 17:30</span></div>
+            <div class="offer-participants">
+              <div class="offer-team offer-team--a"><span class="offer-team__name">Barcelona</span></div>
+              <div class="offer-logos"><div class="offer-logo-bubble"><img src="img-team-logo-bayern.png" alt="Barcelona"></div><div class="offer-logo-bubble"><img src="img-team-logo-bayer.png" alt="Real Madrid"></div></div>
+              <div class="offer-team offer-team--b"><span class="offer-team__name">Real Madrid</span></div>
+            </div>
+            <div class="offer-markets"><div class="offer-market-content">
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder.svg" alt=""></div><div class="offer-market-row__text">Both Teams to Score - <b>Yes</b></div></div>
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder.svg" alt=""></div><div class="offer-market-row__text">Pedri Shots on Target - <b>2+</b></div></div>
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder-last.svg" alt=""></div><div class="offer-market-row__text">Total Goals Over/Under - <b>Over 3.5</b></div></div>
+            </div></div>
+          </div>
+          <div class="offer-card__footer"><button class="offer-odds-btn" type="button"><span class="offer-odds-btn__old">7.20</span><span class="offer-odds-btn__new">7.92</span></button></div>
+        </div>
+
+        <!-- Offer Card 5 -->
+        <div class="offer-card">
+          <div class="offer-card__brand-vector" aria-hidden="true"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 332 124" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M307.662 78.3492L318.237 45.934L220.599 59.6015L231.13 27.2214L182.357 34.019L193.326 0.39062L168.554 3.86279L97.0976 13.8846L101.627 0H0V12.2229L19.0941 9.56295L8.5656 41.943L106.201 28.2755L95.6264 60.6907L168.523 50.6731V50.671L192.931 47.2526L182.357 79.6699L231.13 72.8722L220.599 105.252L318.237 91.5848L307.662 124L332 120.656V75.0052L307.662 78.3492Z" fill="#ECEFF9" fill-opacity="0.65"/></svg></div>
+          <div class="offer-card__badges">
+            <div class="offer-badges">
+              <div class="offer-badge">
+                <div class="offer-badge__lead" style="background:linear-gradient(77.22deg,rgb(165,25,193) 0%,rgb(255,0,66) 99.54%)"><div class="offer-badge__icon"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path d="M2.8125 3.65625C2.8125 3.19026 3.19026 2.8125 3.65625 2.8125H7.00466C7.29237 2.8125 7.56024 2.9591 7.71533 3.20142L11.8055 9.59231C12.0191 9.9261 11.9717 10.3636 11.6914 10.6438L10.6438 11.6914C10.3636 11.9717 9.9261 12.0191 9.59231 11.8055L3.20142 7.71533C2.9591 7.56024 2.8125 7.29237 2.8125 7.00466V3.65625ZM6.75 5.625C6.75 6.24632 6.24632 6.75 5.625 6.75C5.00368 6.75 4.5 6.24632 4.5 5.625C4.5 5.00368 5.00368 4.5 5.625 4.5C6.24632 4.5 6.75 5.00368 6.75 5.625ZM14.7041 10.1194L12.9095 10.3745C12.9745 10.0884 12.9271 9.77968 12.76 9.51857L11.0748 6.88531L12.6994 6.65327C12.8984 6.62486 13.0974 6.70475 13.2214 6.86285L15.0675 9.21521C15.1916 9.37339 15.2219 9.58573 15.1469 9.77226C15.072 9.95878 14.9032 10.0911 14.7041 10.1194ZM6.65322 12.6993L6.88525 11.0747L9.51857 12.76C9.77968 12.9271 10.0884 12.9745 10.3744 12.9095L10.1194 14.7041C10.0911 14.9032 9.95878 15.072 9.77226 15.1469C9.58573 15.2219 9.37339 15.1916 9.21527 15.0675L6.8628 13.2214C6.70469 13.0973 6.6248 12.8983 6.65322 12.6993ZM15.1875 15.1875C15.1875 15.1875 15.0289 12.6405 14.3697 11.9812C14.0532 11.6647 13.6239 11.4869 13.1763 11.4869C12.7288 11.4869 12.2995 11.6647 11.983 11.9812C11.6665 12.2978 11.4887 12.727 11.4887 13.1746C11.4887 13.3962 11.5323 13.6157 11.6171 13.8205C11.702 14.0252 11.8263 14.2112 11.983 14.3679C12.6422 15.0272 15.1875 15.1875 15.1875 15.1875Z" fill="white"/></svg></div><span class="offer-badge__text">25% Super Enhanced</span></div>
+                <div class="offer-badge__end"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 4 22" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 22L0 0H4L0 22Z" fill="#A519C1"/></svg></div>
+              </div>
+              <div class="offer-badge-info"><div class="offer-badge-info__container"><div class="offer-badge-info__icon"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 7C5.5 7.276 5.276 7.5 5 7.5C4.724 7.5 4.5 7.276 4.5 7V4.5C4.5 4.224 4.724 4 5 4C5.276 4 5.5 4.224 5.5 4.5V7ZM5.5 3C5.5 3.276 5.276 3.5 5 3.5C4.724 3.5 4.5 3.276 4.5 3C4.5 2.724 4.724 2.5 5 2.5C5.276 2.5 5.5 2.724 5.5 3ZM5 1C7.2055 1 9 2.7945 9 5C9 7.2055 7.2055 9 5 9C2.7945 9 1 7.2055 1 5C1 2.7945 2.7945 1 5 1ZM5 10C7.7615 10 10 7.7615 10 5C10 2.2385 7.7615 0 5 0C2.2385 0 0 2.2385 0 5C0 7.7615 2.2385 10 5 10Z" fill="#121217"/></svg></div></div><div class="offer-badge-info__vector"><svg style="position:absolute;inset:0;width:100%;height:100%;display:block" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 20V0H4L0 20Z" fill="#F4F7FA"/></svg></div></div>
+            </div>
+            <div class="offer-social-proof"><div class="offer-social-proof__fire"><img src="icon-fire.svg" alt=""></div><span class="offer-social-proof__count">5.9k</span></div>
+          </div>
+          <div class="offer-card__content">
+            <div class="offer-date"><div class="offer-date__sport"><img src="icon-sport-soccer.svg" alt=""></div><span class="offer-date__text">SUN 15/07 21:00</span></div>
+            <div class="offer-participants">
+              <div class="offer-team offer-team--a"><span class="offer-team__name">Man City</span></div>
+              <div class="offer-logos"><div class="offer-logo-bubble"><img src="img-team-logo-bayern.png" alt="Man City"></div><div class="offer-logo-bubble"><img src="img-team-logo-bayer.png" alt="Liverpool"></div></div>
+              <div class="offer-team offer-team--b"><span class="offer-team__name">Liverpool</span></div>
+            </div>
+            <div class="offer-markets"><div class="offer-market-content">
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder.svg" alt=""></div><div class="offer-market-row__text">Haaland Anytime Goalscorer - <b>Yes</b></div></div>
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder.svg" alt=""></div><div class="offer-market-row__text">Match Result - <b>Man City</b></div></div>
+              <div class="offer-market-row"><div class="offer-market-row__indicator"><img src="icon-betbuilder-last.svg" alt=""></div><div class="offer-market-row__text">Both Teams to Score - <b>Yes</b></div></div>
+            </div></div>
+          </div>
+          <div class="offer-card__footer"><button class="offer-odds-btn" type="button"><span class="offer-odds-btn__old">6.00</span><span class="offer-odds-btn__new">7.50</span></button></div>
+        </div>
+
+      </div>
+    </div><!-- /Enhanced -->
+
+  </main>
+
+  <!-- ══ FIXED BOTTOM NAVIGATION BAR ════════════════ -->
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <div class="nav-items-row">
+      <div class="nav-item nav-item--active">
+        <div class="nav-item__icon-pill">
+          <div class="nav-item__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="22 12 19.4 20" fill="none">
+              <path d="M40.8187 19.6304L32.1252 12.1788C31.847 11.9404 31.4297 11.9404 31.1515 12.1788L22.458 19.6304C22.15 19.8987 22.1103 20.3656 22.3786 20.6836C22.6468 20.9916 23.1138 21.0313 23.4317 20.763L31.6384 13.7288L39.845 20.763C39.9841 20.8823 40.163 20.9419 40.3319 20.9419C40.5405 20.9419 40.7491 20.8525 40.8982 20.6836C41.1664 20.3756 41.1267 19.8987 40.8187 19.6304Z" fill="#DB3300"/>
+              <path d="M39.259 21.8758L32.1254 15.7755C31.8472 15.537 31.4398 15.537 31.1616 15.7755L23.9982 21.8857C23.6604 22.1937 23.4617 22.611 23.4418 23.0979V30.4302C23.4418 30.8475 23.6008 31.2449 23.8988 31.543C24.1969 31.841 24.5943 32 25.0116 32H29.3633C29.7707 32 30.1085 31.6622 30.1085 31.2548V25.8003H33.1686V31.2548C33.1686 31.6622 33.5064 32 33.9138 32H38.2655C38.6828 32 39.0802 31.8311 39.3782 31.543C39.6763 31.2548 39.8353 30.8475 39.8353 30.4302V23.0581C39.8055 22.611 39.6167 22.1937 39.259 21.8659V21.8758ZM38.3449 30.4302L38.2655 30.5097H34.6688V25.4625C34.6688 25.1545 34.5496 24.8664 34.331 24.6478C34.1224 24.4292 33.8243 24.31 33.5163 24.31H29.7707C29.4627 24.31 29.1746 24.4292 28.956 24.6478C28.7374 24.8664 28.6182 25.1545 28.6182 25.4625V30.5097H25.0215L24.9421 30.4302V23.1475C24.9421 23.0879 24.9719 23.0383 24.9917 23.0084L31.6485 17.3154L38.2853 22.9886C38.2853 22.9886 38.3549 23.078 38.3549 23.0979V30.4302H38.3449Z" fill="#DB3300"/>
+            </svg>
+          </div>
+        </div>
+        <span class="nav-item__label">Home</span>
+      </div>
+      <div class="nav-item">
+        <div class="nav-item__icon-pill">
+          <div class="nav-item__icon">
+            <div style="position:absolute;top:8.34%;bottom:8.33%;left:25%;right:27.67%;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="87.5999 12 11.359 20.001" fill="none" style="width:100%;height:100%;display:block;">
+                <path d="M98.7614 20.2172C98.6231 19.9702 98.4256 19.7727 98.1786 19.6245C97.9317 19.4764 97.6551 19.4072 97.3786 19.4072H95.2549V12.74C95.2549 12.4041 95.0376 12.1177 94.7116 12.0288C94.3956 11.9399 94.0499 12.0683 93.8819 12.3547L87.8369 22.1828C87.6888 22.4199 87.5999 22.6964 87.5999 22.973C87.5999 23.2594 87.6591 23.536 87.7974 23.7829C87.9357 24.0299 88.1333 24.2274 88.3802 24.3756C88.6271 24.5139 88.9037 24.5929 89.1803 24.5929H91.3039V31.2602C91.3039 31.596 91.5212 31.8824 91.8472 31.9713C91.9163 31.9911 91.9855 32.001 92.0447 32.001C92.3015 32.001 92.5386 31.8726 92.6769 31.6454L98.7219 21.8173C98.87 21.5803 98.9491 21.3037 98.9589 21.0271C98.9589 20.7506 98.8997 20.474 98.7614 20.2172ZM97.4675 21.0469L92.7954 28.6426V23.8521C92.7954 23.4471 92.4596 23.1113 92.0546 23.1113H89.1803L89.0914 23.0619V22.9631L93.7733 15.3575V20.148C93.7733 20.553 94.1091 20.8889 94.5141 20.8889H97.4279L97.4773 20.9975C97.4773 21.0173 97.4773 21.037 97.4576 21.0469H97.4675Z" fill="#526789"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <span class="nav-item__label">Live</span>
+      </div>
+      <div class="nav-item">
+        <div class="nav-item__icon-pill">
+          <div class="nav-item__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="146 12 20 20" fill="none">
+              <path d="M149.975 22.364C149.554 22.364 149.205 22.0148 149.205 21.5936V18.7893C149.205 18.3681 149.554 18.0189 149.975 18.0189C150.396 18.0189 150.746 18.3681 150.746 18.7893V21.5936C150.746 22.0148 150.396 22.364 149.975 22.364Z" fill="#526789"/>
+              <path d="M162.014 22.364C161.593 22.364 161.244 22.0148 161.244 21.5936V18.7893C161.244 18.3681 161.593 18.0189 162.014 18.0189C162.435 18.0189 162.785 18.3681 162.785 18.7893V21.5936C162.785 22.0148 162.435 22.364 162.014 22.364Z" fill="#526789"/>
+              <path d="M158.563 22.1489C157.525 22.1489 156.868 20.8444 156.868 19.9404C156.868 18.6769 158.111 18.6769 158.583 18.6769C159.056 18.6769 160.258 18.6769 160.258 19.9404C160.258 20.8444 159.6 22.1489 158.563 22.1489ZM158.213 20.0226C158.255 20.3719 158.481 20.7622 158.604 20.8238C158.655 20.7622 158.881 20.3513 158.922 20.0226C158.686 20.0021 158.439 20.0021 158.213 20.0226Z" fill="#526789"/>
+              <path d="M161.614 31.9897H150.376C150.068 31.9897 149.77 31.8665 149.544 31.6507C149.318 31.435 149.205 31.1269 149.205 30.8187V22.3647H147.171C146.863 22.3647 146.565 22.2414 146.339 22.0257C146.113 21.81 146 21.5121 146 21.1936V18.7694C146 17.0437 146.647 15.3898 147.828 14.1263C149.01 12.8731 150.602 12.113 152.328 12H159.652C161.377 12.113 162.98 12.8731 164.161 14.1366C165.342 15.4001 165.99 17.0437 165.99 18.7797V21.2039C165.99 21.5121 165.866 21.81 165.651 22.036C165.435 22.2517 165.127 22.3749 164.819 22.3749H162.785V30.829C162.785 31.1371 162.661 31.435 162.446 31.661C162.23 31.887 161.922 32 161.614 32V31.9897ZM150.746 30.4489H161.244V21.5936C161.244 21.1724 161.593 20.8238 162.014 20.8238H164.459V18.7694C164.459 17.434 163.956 16.1602 163.041 15.1844C162.209 14.2907 161.1 13.7257 159.898 13.5716C159.724 14.4037 159.292 15.1638 158.655 15.7288C157.197 17.0334 154.824 17.0334 153.355 15.7288C152.718 15.1536 152.276 14.4037 152.112 13.5716C150.91 13.7257 149.801 14.301 148.958 15.1947C148.044 16.1705 147.541 17.4443 147.541 18.7797V20.8341H149.985C150.407 20.8341 150.756 21.1834 150.756 21.6045V30.4592L150.746 30.4489ZM153.683 13.5408C153.817 13.9414 154.053 14.301 154.372 14.5783C155.265 15.3796 156.724 15.3796 157.618 14.5783C157.936 14.2907 158.172 13.9414 158.306 13.5408H153.683Z" fill="#526789"/>
+            </svg>
+          </div>
+        </div>
+        <span class="nav-item__label">Sports</span>
+      </div>
+      <div class="nav-item">
+        <div class="nav-item__icon-pill">
+          <div class="nav-item__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="208.4 12 20 20" fill="none">
+              <path d="M226.373 12H210.426C208.941 12 208.4 13.2095 208.4 14.0265V29.9735C208.4 31.4589 209.609 32 210.426 32H226.373C227.859 32 228.4 30.7905 228.4 29.9735V14.0265C228.4 12.5411 227.19 12 226.373 12ZM226.808 29.9629C226.798 30.4085 226.511 30.4085 226.373 30.4085H210.437C209.991 30.3979 209.991 30.1114 209.991 29.9735V14.0371C210.002 13.5915 210.288 13.5915 210.426 13.5915H226.363C226.808 13.6021 226.808 13.8886 226.808 14.0265V29.9629Z" fill="#526789"/>
+              <path d="M216.166 16.2122L214.49 18.4509L213.652 17.6127C213.344 17.305 212.835 17.305 212.527 17.6127C212.22 17.9204 212.22 18.4297 212.527 18.7374L214.013 20.2228C214.161 20.3714 214.363 20.4562 214.575 20.4562C214.861 20.435 215.074 20.3289 215.212 20.1379L217.44 17.1671C217.705 16.817 217.631 16.3183 217.281 16.0531C216.93 15.7878 216.432 15.8621 216.166 16.2122Z" fill="#526789"/>
+              <path d="M223.912 18.1326H220.23C219.795 18.1326 219.434 18.4934 219.434 18.9284C219.434 19.3634 219.795 19.7241 220.23 19.7241H223.912C224.347 19.7241 224.708 19.3634 224.708 18.9284C224.708 18.4934 224.347 18.1326 223.912 18.1326Z" fill="#526789"/>
+              <path d="M216.166 23.6393L214.49 25.878L213.652 25.0398C213.344 24.7321 212.835 24.7321 212.527 25.0398C212.22 25.3475 212.22 25.8568 212.527 26.1645L214.013 27.6499C214.161 27.7984 214.363 27.8833 214.575 27.8833C214.861 27.8621 215.074 27.756 215.212 27.565L217.44 24.5942C217.705 24.244 217.631 23.7454 217.281 23.4801C216.93 23.2149 216.432 23.2891 216.166 23.6393Z" fill="#526789"/>
+              <path d="M223.912 25.496H220.23C219.795 25.496 219.434 25.8568 219.434 26.2918C219.434 26.7268 219.795 27.0875 220.23 27.0875H223.912C224.347 27.0875 224.708 26.7268 224.708 26.2918C224.708 25.8568 224.347 25.496 223.912 25.496Z" fill="#526789"/>
+            </svg>
+          </div>
+        </div>
+        <span class="nav-item__label">Bets</span>
+      </div>
+      <div class="nav-item">
+        <div class="nav-item__icon-pill">
+          <div class="nav-item__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="270.8 12 19.8 20" fill="none">
+              <path d="M285.354 25.4289C285.885 24.7813 286.309 24.0701 286.628 23.2845C287.031 22.276 287.233 21.2144 287.222 20.1316C287.222 19.0488 286.989 17.9979 286.564 16.9894C286.14 15.9915 285.535 15.0998 284.76 14.3461C283.985 13.5924 283.082 12.9979 282.074 12.5945C281.065 12.1911 280.025 12 278.921 12C277.838 12 276.787 12.2335 275.779 12.6582C274.781 13.0828 273.889 13.6879 273.135 14.4628C272.382 15.2378 271.787 16.1401 271.384 17.138C270.991 18.1465 270.8 19.2081 270.8 20.2909C270.8 21.3737 271.033 22.4246 271.458 23.4225C271.883 24.4204 272.488 25.3121 273.263 26.0658C274.038 26.8195 274.94 27.414 275.949 27.8174C276.925 28.2102 277.966 28.4119 279.016 28.4119H279.101C280.184 28.4119 281.235 28.1783 282.244 27.7537C282.976 27.4459 283.645 27.0318 284.25 26.5329L289.462 31.7452C289.622 31.9045 289.823 31.9788 290.025 31.9788C290.227 31.9788 290.428 31.9045 290.588 31.7452C290.895 31.4374 290.895 30.9278 290.588 30.62L285.375 25.397L285.354 25.4289ZM281.607 26.31C280.8 26.6497 279.951 26.8301 279.08 26.8408C278.242 26.8514 277.35 26.6921 276.543 26.3631C275.726 26.034 275.004 25.5563 274.377 24.9512C273.751 24.3355 273.263 23.6242 272.923 22.8174C272.583 22.0106 272.403 21.1614 272.392 20.2909C272.392 19.4204 272.541 18.5605 272.87 17.7537C273.199 16.9469 273.677 16.2144 274.282 15.5881C274.898 14.9618 275.609 14.4735 276.416 14.1338C277.222 13.7941 278.072 13.6136 278.942 13.603C279.813 13.603 280.673 13.7516 281.479 14.0807C282.286 14.4098 283.019 14.8875 283.645 15.4926C284.271 16.1083 284.76 16.8195 285.099 17.6263C285.439 18.4331 285.619 19.2824 285.63 20.1529C285.63 21.0234 285.481 21.8832 285.152 22.69C284.823 23.4968 284.346 24.2293 283.74 24.8556C283.135 25.482 282.413 25.9703 281.607 26.31Z" fill="#526789"/>
+            </svg>
+          </div>
+        </div>
+        <span class="nav-item__label">Explore</span>
+      </div>
+      <div class="nav-casino-pill">
+        <div class="nav-casino-pill__icon">
+          <img src="assets/8568a540-4b6b-41ca-866c-c5985e947b0e.svg" alt="Casino">
+        </div>
+      </div>
+    </div>
+    <div class="nav-home-indicator" aria-hidden="true"></div>
+  </nav>
+
+</div><!-- /page -->
+
+<!-- ══ FILTERS BOTTOM SHEET ═══════════════════════════ -->
+<div class="bs-overlay" id="filters-sheet" role="dialog" aria-modal="true" aria-label="Filters">
+
+  <div class="bs-panel">
+
+    <!-- Grabber -->
+    <div class="bs-grabber"><div class="bs-grabber__bar"></div></div>
+
+    <!-- Header -->
+    <div class="bs-title-row">
+      <span class="bs-title">Filters</span>
+    </div>
+    <div class="bs-divider"></div>
+
+    <!-- Scrollable body -->
+    <div class="bs-body">
+
+      <!-- LEAGUES -->
+      <div class="bs-section-label">LEAGUES</div>
+      <div class="bs-leagues">
+
+        <!-- World Cup — featured card -->
+        <div class="bs-league-featured">
+          <div class="bs-league-featured__header">
+            <div class="bs-league-logo">
+              <img src="assets/logo-worldcup-2026.png" alt="World Cup 2026">
+            </div>
+            <span class="bs-league-featured__name">World Cup (15)</span>
+          </div>
+          <div class="bs-chip-row">
+            <button class="bs-chip bs-chip--selected">
+              <span class="bs-chip__icon"><img src="assets/icon-check.svg" alt=""></span>
+              All
+            </button>
+            <button class="bs-chip bs-chip--default">Spain - Belgium</button>
+            <button class="bs-chip bs-chip--default">France - Morocco</button>
+            <button class="bs-chip bs-chip--default">Norway - England</button>
+            <button class="bs-chip bs-chip--default">USA - England</button>
+            <button class="bs-view-btn">View 10 matches</button>
+          </div>
+        </div>
+
+        <!-- League pill rows -->
+        <div class="bs-leagues-rows">
+
+          <div class="bs-leagues-row">
+            <div class="bs-league-pill">
+              <div class="bs-league-pill__logo"><img src="assets/logo-nba.svg" alt="NBA"></div>
+              <span class="bs-league-pill__name">NBA (6)</span>
+            </div>
+            <div class="bs-league-pill">
+              <div class="bs-league-pill__logo"><img src="assets/logo-atp.svg" alt="ATP"></div>
+              <span class="bs-league-pill__name">Geneva (4)</span>
+            </div>
+            <div class="bs-league-pill">
+              <div class="bs-league-pill__logo"><img src="assets/logo-nbb.svg" alt="NBB"></div>
+              <span class="bs-league-pill__name">NBB (10)</span>
+            </div>
+          </div>
+
+          <div class="bs-leagues-row">
+            <div class="bs-league-pill">
+              <div class="bs-league-pill__logo"><img src="assets/icon-flag-usa.svg" alt="USA"></div>
+              <span class="bs-league-pill__name">WNBA (10)</span>
+            </div>
+            <div class="bs-league-pill">
+              <div class="bs-league-pill__logo"><img src="assets/icon-flag-usa.svg" alt="USA"></div>
+              <span class="bs-league-pill__name">MLB (4)</span>
+            </div>
+          </div>
+
+          <div class="bs-leagues-row">
+            <div class="bs-league-pill">
+              <div class="bs-league-pill__logo" style="background:rgba(255,255,255,0.9);">
+                <img src="assets/logo-brasileiro-serie-b.png" alt="Brasileiro Serie B">
+              </div>
+              <span class="bs-league-pill__name">Braisilerão - Serie B (10)</span>
+            </div>
+            <div class="bs-league-pill">
+              <div class="bs-league-pill__logo"><img src="assets/logo-euroleague.svg" alt="Euroleague"></div>
+              <span class="bs-league-pill__name">Euroleague (10)</span>
+            </div>
+          </div>
+
+          <div class="bs-leagues-row">
+            <div class="bs-league-pill">
+              <div class="bs-league-pill__logo"><img src="assets/logo-atp.svg" alt="ATP"></div>
+              <span class="bs-league-pill__name">Hamburg (10)</span>
+            </div>
+            <div class="bs-league-pill">
+              <div class="bs-league-pill__logo"><img src="assets/logo-wta.svg" alt="WTA"></div>
+              <span class="bs-league-pill__name">Strasbourg (W) (10)</span>
+            </div>
+            <div class="bs-league-pill">
+              <div class="bs-league-pill__logo"><img src="assets/icon-flag-usa.svg" alt="USA"></div>
+              <span class="bs-league-pill__name">NHL (10)</span>
+            </div>
+          </div>
+
+        </div><!-- /bs-leagues-rows -->
+      </div><!-- /bs-leagues -->
+
+      <div class="bs-divider"></div>
+
+      <!-- ODDS -->
+      <div class="bs-section-label">ODDS</div>
+      <div class="bs-odds-chips">
+        <button class="bs-chip bs-chip--default">
+          <span class="bs-chip__arrow"><img src="assets/icon-arrow-down.svg" alt=""></span>
+          Low to High
+        </button>
+        <button class="bs-chip bs-chip--default">Balanced: € 5-12</button>
+        <button class="bs-chip bs-chip--default">Feeling Adventurous: € 250 - 500</button>
+      </div>
+
+      <!-- Range slider -->
+      <div class="bs-range-area">
+        <div class="bs-range-values">
+          <span>€ 20.00</span>
+          <span>€ 120.00</span>
+        </div>
+        <div class="bs-range-track">
+          <div class="bs-range-segment bs-range-segment--off" style="width:51px;"></div>
+          <div class="bs-range-thumb"></div>
+          <div class="bs-range-segment bs-range-segment--on"></div>
+          <div class="bs-range-thumb"></div>
+          <div class="bs-range-segment bs-range-segment--off" style="width:21px;"></div>
+        </div>
+        <div class="bs-range-edge">
+          <button class="bs-chip bs-chip--default">Min</button>
+          <button class="bs-chip bs-chip--default">Max</button>
+        </div>
+      </div>
+
+    </div><!-- /bs-body -->
+
+    <!-- Footer -->
+    <div class="bs-footer">
+      <button class="bs-btn-clear" id="bs-clear">Clear All</button>
+      <button class="bs-btn-show" id="bs-show">Show Results (12)</button>
+    </div>
+
+  </div><!-- /bs-panel -->
+</div><!-- /bs-overlay -->
+
+<!-- Betslip FAB -->
+<div class="betslip-fab" id="betslip-fab" role="button" aria-label="Open betslip">
+  <span class="betslip-fab__badge" id="betslip-fab-badge">1</span>
+  <span class="betslip-fab__odds" id="betslip-fab-odds">-</span>
+</div>
+
+<script>
+(function () {
+  var selections = new Map();
+  var ALL_BTNS = '.sel-btn, .bod-sel-btn, .betslip-btn, .sp-odds-btn, .offer-odds-btn, .bet-row__odds';
+
+  function getOdds(btn) {
+    var el = btn.querySelector('.offer-odds-btn__new, .betslip-btn__odds, .sel-btn__odds, .bod-sel-btn__odds');
+    return el ? el.textContent.trim() : btn.textContent.trim();
+  }
+
+  function initButtons() {
+    var idx = 0;
+    document.querySelectorAll(ALL_BTNS).forEach(function (btn) {
+      if (btn.dataset.betId) return;
+      btn.dataset.betId = 'b' + (idx++);
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleSelection(btn);
+      });
+    });
+  }
+
+  function toggleSelection(btn) {
+    var id = btn.dataset.betId;
+    if (btn.classList.contains('is-selected')) {
+      btn.classList.remove('is-selected');
+      selections.delete(id);
+    } else {
+      btn.classList.add('is-selected');
+      selections.set(id, getOdds(btn));
+    }
+    updateFab();
+  }
+
+  function updateFab() {
+    var fab    = document.getElementById('betslip-fab');
+    var badge  = document.getElementById('betslip-fab-badge');
+    var oddsEl = document.getElementById('betslip-fab-odds');
+    if (selections.size === 0) {
+      fab.classList.remove('is-visible');
+    } else {
+      fab.classList.add('is-visible');
+      badge.textContent = selections.size;
+      var vals = Array.from(selections.values());
+      oddsEl.textContent = vals[vals.length - 1];
+    }
+  }
+
+  /* ── Filters bottom sheet ── */
+  (function () {
+    var overlay = document.getElementById('filters-sheet');
+
+    function openSheet()  { overlay.classList.add('is-open'); }
+    function closeSheet() { overlay.classList.remove('is-open'); }
+
+    /* Close on overlay backdrop click */
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeSheet();
+    });
+
+    document.getElementById('bs-clear').addEventListener('click', closeSheet);
+    document.getElementById('bs-show').addEventListener('click', closeSheet);
+
+    /* Expose so other triggers can call openSheet() */
+    window.openFiltersSheet = openSheet;
+  }());
+
+  document.getElementById('betslip-fab').addEventListener('click', function () {
+    // bottom sheet will go here
+  });
+
+  initButtons();
+})();
+</script>
+</body>
+</html>
